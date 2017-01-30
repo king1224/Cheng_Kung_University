@@ -1,0 +1,13 @@
+Script started on 2016年03月02日 (週三) 18時39分29秒
+]0;C14031162@2015cpp: ~/lab1C14031162@2015cpp:~/lab1$ whoami; pwd
+C14031162
+/home/C14031162/lab1
+]0;C14031162@2015cpp: ~/lab1C14031162@2015cpp:~/lab1$ git config -l
+user.name=KingHuang
+use.email=a0987856762@gmail.com
+]0;C14031162@2015cpp: ~/lab1C14031162@2015cpp:~/lab1$ git clone https://github.com/king1224/lab1.git
+Cloning into 'lab1'...
+warning: You appear to have cloned an empty repository.
+]0;C14031162@2015cpp: ~/lab1C14031162@2015cpp:~/lab1$ exit
+
+Script done on 2016年03月02日 (週三) 18時40分47秒

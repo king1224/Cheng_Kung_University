@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/Super_mario_BackMusic.mp3</file>
+        <file>img/Super_mario_Jump.mp3</file>
+    </qresource>
+</RCC>

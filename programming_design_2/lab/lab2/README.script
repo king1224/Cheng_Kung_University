@@ -1,0 +1,41 @@
+把Makefile BMI.h BMI.cpp lab2.cpp放在同一個資料夾
+input make即可
+
+或是分別輸入
+g++ -c BMI.cpp
+g++ -c lab2.cpp
+g++ -o lab2 lab2.o BMI.o
+
+以下是一個script紀錄的編譯及執行過程
+
+
+Script started on 2016年03月21日 (週一) 09時48分00秒
+^[]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ ls
+BMI.cpp  BMI.h  file.in  lab2.cpp  Makefile  README.script
+]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ touch BMI.h
+]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ cat file.in
+170 68
+160 85
+162 43
+167 80
+192 58
+0 0
+]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ make
+g++ -c lab2.cpp
+g++ -c BMI.cpp
+g++ -o lab2 lab2.o BMI.o
+]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ ls
+BMI.cpp  BMI.h  BMI.o  file.in  [0m[01;32mlab2[0m  lab2.cpp  lab2.o  Makefile  README.script
+]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ ./lab2
+]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ f[Kcat file.out[K[K[K[K[K[K[K[K[K[K[K[Kls
+BMI.cpp  BMI.o    file.out  lab2.cpp  Makefile
+BMI.h    file.in  [0m[01;32mlab2[0m      lab2.o    README.script
+]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ cat file.out
+23.53	Normal
+33.20	Obese Class I (Moderately obese)
+16.38	Underweight
+28.69	Overweight
+15.73	Severely underweight
+]0;C14031162@2016cpp: ~/lab2[01;32mC14031162@2016cpp[00m:[01;34m~/lab2[00m$ Thanl[K[K[K[K[Kexit
+
+Script done on 2016年03月21日 (週一) 09時49分24秒

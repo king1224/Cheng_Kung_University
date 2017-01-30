@@ -1,0 +1,51 @@
+O(n logn) 和 O(n^2) 的差別是
+O(n logn) 不會讓我等很久
+O(n^2)    害我等answer到天亮
+n^2的時間複雜度在n很大的時候會衝的很快
+而n logn 幾乎要接近線性時間
+n越大，這兩者的耗時差距越明顯
+
+
+Script started on 2016年04月05日 (週二) 01時07分38秒
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ ls
+Clock.cpp  Clock.h  lab3_A.cpp  lab3_B.cpp  Makefile  README.script
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ make
+g++ -c Clock.cpp
+g++ -o lab3_B lab3_B.cpp Clock.o
+g++ -o lab3_A lab3_A.cpp
+ls
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ ls
+Clock.cpp  Clock.o  lab3_A.cpp  lab3_B.cpp  README.script
+Clock.h    [0m[01;32mlab3_A[0m   [01;32mlab3_B[0m      Makefile
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ ls[Kab3_B.lab3_B/lab3_B
+1000
+sort(): 0 seconds
+v1 and v2 are different.
+insertion_sort(): 0.01 seconds.
+v1 and v2 are the same.
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ ./lab3_B
+10000
+sort(): 0 seconds
+v1 and v2 are different.
+insertion_sort(): 1.28 seconds.
+v1 and v2 are the same.
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ ./lab3_B
+100000
+sort(): 0.04 seconds
+v1 and v2 are different.
+insertion_sort(): 128.15 seconds.
+v1 and v2 are the same.
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ ./lab3_B
+1000000
+sort(): 0.52 seconds
+v1 and v2 are different.
+1 insertion_sort(): 12815.7 seconds.
+v1 and v2 are the same.
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ maje[K[Kke clean
+rm *.o lab3_A lab3_B
+touch Clock.h
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ ls
+Clock.cpp  Clock.h  lab3_A.cpp  lab3_B.cpp  Makefile  README.script
+]0;C14031162@2015cpp: ~/lab3[01;32mC14031162@2015cpp[00m:[01;34m~/lab3[00m$ exit
+
+Script done on 2016年04月05日 (週二) 07時53分14秒

@@ -1,0 +1,41 @@
+<RCC>
+    <qresource prefix="/Background">
+        <file alias="ground.png">image/GROUND.png</file>
+        <file alias="sling1.png">image/sling1.png</file>
+        <file alias="sky.png">image/Sky.png</file>
+        <file alias="Wall_Iron.png">image/Wall_Iron.png</file>
+        <file alias="Wall_Glass.png">image/Wall_Glass.png</file>
+        <file alias="Wall_Wood.png">image/Wall_Wood.png</file>
+        <file alias="Wall_Glass2.png">image/Wall_Glass2.png</file>
+        <file alias="Wall_Iron2.png">image/Wall_Iron2.png</file>
+        <file alias="Wall_Iron3.png">image/Wall_Iron3.png</file>
+        <file alias="Wall_Wood2.png">image/Wall_Wood2.png</file>
+        <file alias="Nothing.png">image/Nothing.png</file>
+        <file alias="Bomb1.png">image/Bomb1.png</file>
+        <file alias="Bomb2.png">image/Bomb2.png</file>
+        <file alias="Bomb3.png">image/Bomb3.png</file>
+    </qresource>
+    <qresource prefix="/Bird">
+        <file alias="Bird_Blue.png">image/Bird_Blue.png</file>
+        <file alias="Bird_Red.png">image/Bird_Red.png</file>
+        <file alias="Bird_Black1.png">image/Bird_Black1.png</file>
+        <file alias="Bird_Black2.png">image/Bird_Black2.png</file>
+        <file alias="Bird_Black3.png">image/Bird_Black3.png</file>
+        <file alias="Bird_Black4.png">image/Bird_Black4.png</file>
+        <file alias="Bird_Yellow1.png">image/Bird_Yellow1.png</file>
+        <file alias="Bird_Yellow2.png">image/Bird_Yellow2.png</file>
+        <file alias="Bird_White1.png">image/Bird_White1.png</file>
+        <file alias="Bird_White2.png">image/Bird_White2.png</file>
+        <file alias="Pig1.png">image/Pig1.png</file>
+        <file alias="Pig2.png">image/Pig2.png</file>
+        <file alias="Pig3.png">image/Pig3.png</file>
+    </qresource>
+    <qresource prefix="/Music">
+        <file alias="Music.mp3">image/Music.mp3</file>
+        <file alias="Music3.mp3">image/Music3.mp3</file>
+        <file alias="Music5.mp3">image/Music5.mp3</file>
+        <file alias="Music2.mp3">image/Music2.mp3</file>
+        <file alias="Music4.mp3">image/Music4.mp3</file>
+        <file alias="Music6.mp3">image/Music6.mp3</file>
+    </qresource>
+</RCC>
