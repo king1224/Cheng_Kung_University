@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\digital_sum.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\hw2.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\LED_blink\LED_blink.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\multi\multi.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

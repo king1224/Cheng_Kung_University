@@ -1,0 +1,93 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+        
+        ORG     0FFD4h
+        DW      P2_ISR
+        
+        ORG     0FFDEh
+        DW      P1_ISR
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        
+        MOV.B   #00000000b,&P2SEL
+        MOV.B   #00000000b,&P2DIR
+        MOV.B   #00000010b,&P2REN
+        MOV.B   #00000010b,&P2OUT
+        MOV.B   #00000010b,&P2IES
+        MOV.B   #00000010b,&P2IE
+        
+        MOV.B   #00000000b,&P1SEL
+        MOV.B   #00000000b,&P1DIR
+        MOV.B   #00000010b,&P1REN
+        MOV.B   #00000010b,&P1OUT
+        MOV.B   #00000010b,&P1IES
+        MOV.B   #00000010b,&P1IE
+        
+        mov.b   #1b,P1DIR
+        mov.b   #0b,P1SEL
+        mov.b   #10000000b,P4DIR
+        mov.b   #0b,P4SEL
+        
+        EINT
+        
+LOOP:
+        JMP     LOOP
+        
+        DINT
+        
+P2_ISR:
+        BIC.B   #00000010b, &P2IE
+        XOR.B   #1b,P1OUT
+        
+        BIC.B   #00000010b, &P2IFG
+        BIS.B   #00000010b, &P2IE
+        
+        mov     #800,R5
+Delay1:
+        sub     #1,R5
+        jz      Outfor1
+        mov     #500,R6
+for1:   
+        sub     #1,R6
+        jz      Delay1
+        jmp     for1
+Outfor1:
+        XOR.B   #1b,P1OUT
+        RETI
+        
+P1_ISR:
+        BIC.B   #00000010b, &P1IE
+        XOR.B   #10000000b, P4OUT
+        
+        BIC.B   #00000010b, &P1IFG
+        BIS.B   #00000010b, &P1IE
+        
+        mov     #800,R5
+Delay2:
+        sub     #1,R5
+        jz      Outfor2
+        mov     #500,R6
+for2:   
+        sub     #1,R6
+        jz      Delay2
+        jmp     for2
+Outfor2:
+        XOR.B   #10000000b, P4OUT        
+        RETI
+        
+        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

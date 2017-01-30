@@ -1,0 +1,33 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+        ORG     01000h
+        DW      "Hao123\0"              ; 輸入字串
+        
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        
+        mov.w   #0x1000,R4              ; 從1000位址開始
+        mov.w   #0,R12                  ; 清空R12
+        clr.w   R10                     ; R10為0，用來讀到0時結束
+        
+Loop:   mov.w   #0,R11                  ; 將當前字元值存到R11
+        add.b   @R4,R11
+        add.w   R11,R12                 ; 再將當前字元值加到R12
+        add.w   #1,R4
+        cmp     R11,R10                 ; 判斷是否讀到0 (\0)
+        jn     Loop
+        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

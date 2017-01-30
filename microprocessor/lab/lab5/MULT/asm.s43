@@ -1,0 +1,35 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    Mult                    ; module name
+
+        PUBLIC  Mult                    ; make the main label vissible
+                                        ; outside this module
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+Mult:
+        add R14,R12
+        add R15,R13
+        pop R4
+        pop R5
+        pop R8
+        pop R9
+        add R8,R12
+        add R9,R13
+        pop R8
+        pop R9
+        add R8,R12
+        add R9,R13
+        pop R8
+        pop R9
+        add R8,R12
+        add R9,R13
+        push R5
+        push R4
+        
+
+        ret
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

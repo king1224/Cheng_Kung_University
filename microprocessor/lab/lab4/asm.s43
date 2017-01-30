@@ -1,0 +1,31 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        extern  delay
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        mov.b   #1b,P1DIR
+        mov.b   #0b,P1SEL
+        mov.b   #10000000b,P4DIR
+        mov.b   #0b,P4SEL
+Bright: mov.b   #1b,P1OUT
+        mov.b   #0b,P4OUT
+        call    #delay
+        mov.b   #0b,P1OUT
+        mov.b   #10000000b,P4OUT
+        call    #delay
+        JMP     Bright
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

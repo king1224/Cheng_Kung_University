@@ -1,0 +1,66 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        ORG     0FFE0h
+        DW      TIMER1_A1_ISR
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE  
+                  ; place program in 'CODE' segment
+
+TIMER1_A1_ISR:
+        cmp.w #0,R5
+        jz      UP
+        sub.w   #1,&TA0CCR3
+        cmp.w   #0,&TA0CCR3
+        jz      DOWN_END
+        jmp OUTT
+DOWN_END:
+        mov.w #0,R5
+        jmp OUTT
+        
+UP:
+        add.w   #1,&TA0CCR3
+        cmp.w   #30,&TA0CCR3
+        jz      UP_END
+        jmp     OUTT
+UP_END
+        mov.w   #1,R5
+        jmp     OUTT
+        
+OUTT:
+        mov.w   #65300,TA1R
+        bic.w   #00000001b,TA1CTL            ;clearing the TAIFG (flag)
+        reti
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        
+        clr.w R5
+        
+        ;LED setup
+        bis.b   #00010000b,&P1SEL       //system module
+        bis.b   #00010000b,&P1DIR
+     
+        ;TimerA setup
+        mov.w   #TASSEL_1+MC_1+TACLR,&TA0CTL // ACLK, up mode  
+        mov.w   #100,&TA0CCR0
+        mov.w   #OUTMOD_7, &TA0CCTL3    //pwm output
+        mov.w   #0,&TA0CCR3
+
+        mov.w   #0000000100100110b,&TA1CTL // ACLK, contmode, set TAIE
+        mov.w   #65300,TA1R
+        nop
+        bis.w   #GIE,SR
+        nop        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

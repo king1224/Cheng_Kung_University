@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>1664162689</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\Lab7-3.s43</file>
+      <file>$PROJ_DIR$\Debug\Obj\Lab7-3.r43</file>
+      <file>$TOOLKIT_DIR$\inc\msp430.h</file>
+      <file>$PROJ_DIR$\lab7.s43</file>
+      <file>$TOOLKIT_DIR$\config\linker\lnk430f5529.xcl</file>
+      <file>$TOOLKIT_DIR$\inc\msp430f5529.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\lab7.r43</file>
+      <file>$PROJ_DIR$\Debug\Obj\asm.r43</file>
+      <file>$PROJ_DIR$\Debug\List\Lab7-3.map</file>
+      <file>$PROJ_DIR$\asm.s43</file>
+      <file>$TOOLKIT_DIR$\config\linker\multiplier32.xcl</file>
+      <file>$PROJ_DIR$\Debug\Exe\Lab7-3.d43</file>
+      <file>$PROJ_DIR$\..\..\&#x8056;&#x8A95;&#x5C08;&#x984C;\Servo_Motor\asm.s43</file>
+    </outputs>
+    <file>
+      <name>$PROJ_DIR$\Lab7-3.s43</name>
+      <outputs>
+        <tool>
+          <name>A430</name>
+          <file> 1</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>A430</name>
+          <file> 2 5</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lab7.s43</name>
+      <outputs>
+        <tool>
+          <name>A430</name>
+          <file> 6</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\asm.s43</name>
+      <outputs>
+        <tool>
+          <name>A430</name>
+          <file> 7</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>A430</name>
+          <file> 2 5</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\Lab7-3.d43</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 8</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 4 10 1</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 8 11</file>
+        </tool>
+      </outputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>XLINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

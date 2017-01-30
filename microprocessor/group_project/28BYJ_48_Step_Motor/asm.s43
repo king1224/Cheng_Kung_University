@@ -1,0 +1,62 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        
+        bic.b #00111100b,&P1SEL
+        bis.b #00111100b,&P1DIR
+        bic.b #00111100b,&P1OUT
+        bic.b #00110000b,&P2SEL
+        bis.b #00110000b,&P2DIR
+        bis.b #00110000b,&P2OUT
+        
+LOOP0:
+        bic.b #00111100b,&P1OUT  ;clr AB A'B'
+        bis.b #00000100b,&P1OUT  ;SET AB
+        ;----------------
+        mov.w #1800,R5
+LOOP1:
+        sub.w #1,R5
+        jnz LOOP1
+        ;----------------
+        bic.b #00111100b,&P1OUT  ;clr AB A'B'
+        bis.b #00001000b,&P1OUT  ;SET BA'
+        ;----------------
+        mov.w #1800,R5
+LOOP2:
+        sub.w #1,R5
+        jnz LOOP2
+        ;----------------
+        bic.b #00111100b,&P1OUT  ;clr AB A'B'
+        bis.b #00010000b,&P1OUT  ;SET A'B'
+        ;----------------
+        mov.w #1800,R5
+LOOP3:
+        sub.w #1,R5
+        jnz LOOP3
+        ;----------------
+        bic.b #00111100b,&P1OUT  ;clr AB A'B'
+        bis.b #00100000b,&P1OUT  ;SET B'A
+        ;----------------
+        mov.w #1800,R5
+LOOP4:
+        sub.w #1,R5
+        jnz LOOP4
+        ;----------------
+        jmp LOOP0
+        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

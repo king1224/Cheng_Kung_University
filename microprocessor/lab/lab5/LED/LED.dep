@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>264290024</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\..\..\..\&#x4F5C;&#x696D;\HW2\hw2\digital_sum\asm.s43</file>
+      <file>$TOOLKIT_DIR$\inc\msp430.h</file>
+      <file>$PROJ_DIR$\asm.s43</file>
+      <file>$PROJ_DIR$\Debug\Obj\asm.r43</file>
+      <file>$PROJ_DIR$\Debug\Exe\LED.d43</file>
+      <file>$PROJ_DIR$\Debug\Exe\LED.r43</file>
+      <file>$TOOLKIT_DIR$\inc\msp430f5529.h</file>
+      <file>$PROJ_DIR$\..\..\..\&#x4F5C;&#x696D;\HW2\hw2\multi\asm.s43</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 4</file>
+        </tool>
+        <tool>
+          <name>XAR</name>
+          <file> 5</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\asm.s43</name>
+      <outputs>
+        <tool>
+          <name>A430</name>
+          <file> 3</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>A430</name>
+          <file> 1 6</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\LED.r43</name>
+      <inputs>
+        <tool>
+          <name>XAR</name>
+          <file> 3</file>
+        </tool>
+      </inputs>
+    </file>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>XLINK</tool>
+    </forcedrebuild>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>XLINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

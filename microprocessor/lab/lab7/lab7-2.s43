@@ -1,0 +1,40 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        ORG     0FFEAh
+        DW      CCIFG0_ISR
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE  
+                  ; place program in 'CODE' segment
+
+CCIFG0_ISR:
+        xor.b   #00000001b,&P1OUT
+        reti
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        
+        ;LED setup
+        bic.b   #00000001b,&P1SEL
+        bis.b   #00000001b,&P1DIR
+        bic.b   #00000001b,&P1OUT
+     
+        ;TimerA setup
+        mov.w   #0000000100010100b,&TA0CTL // ACLK, up mode
+        mov.w   #CCIE, &TA0CCTL0        //set CCIE
+        mov.w   #16384,&TA0CCR0
+        nop
+        bis.w   #GIE,SR
+        nop        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

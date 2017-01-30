@@ -1,0 +1,116 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V6.50.1.967/W32 for MSP430           05/Dec/2016  11:17:58
+# Copyright 1996-2016 IAR Systems AB.
+# Standalone license - IAR Embedded Workbench for Texas Instruments MSP430, 8K KickStart Edition 6.50
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  
+#        D:\105上課程\微算機原理與應用\作業\HW2\C14031162_HW2\main.c
+#    Command line  =  
+#        D:\105上課程\微算機原理與應用\作業\HW2\C14031162_HW2\main.c -lCN
+#        D:\105上課程\微算機原理與應用\作業\HW2\C14031162_HW2\Debug\List -o
+#        D:\105上課程\微算機原理與應用\作業\HW2\C14031162_HW2\Debug\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430F5529__ -e --double=32 --dlib_config "D:\IAR
+#        Systems\Embedded Workbench 7.4\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -Ol --multiplier=32 --hw_workaround=CPU40
+#        --hw_workaround=nop_after_lpm --code_model=large
+#    Locale        =  Chinese (Traditional)_Taiwan.950
+#    List file     =  
+#        D:\105上課程\微算機原理與應用\作業\HW2\C14031162_HW2\Debug\List\main.lst
+#    Object file   =  
+#        D:\105上課程\微算機原理與應用\作業\HW2\C14031162_HW2\Debug\Obj\main.r43
+#
+###############################################################################
+
+D:\105上課程\微算機原理與應用\作業\HW2\C14031162_HW2\main.c
+      1          
+      2          #include "io430.h"
+
+   \                                 In  segment DATA16_AN, at 0x15c
+   \   union <unnamed> volatile _A_WDTCTL
+   \                     _A_WDTCTL:
+   \   000000                DS8 2
+      3          
+      4          extern unsigned long long int multi(unsigned int a, unsigned int b, unsigned int c, unsigned int d); 
+      5          extern unsigned int digital_sum(unsigned long long int a); 
+      6          extern void LED_blink(unsigned int times); 
+      7          
+
+   \                                 In  segment CODE, align 2
+      8          int main( void )
+   \                     main:
+      9          {
+     10            // Stop watchdog timer to prevent time out reset
+     11            WDTCTL = WDTPW + WDTHOLD;
+   \   000000   B240805A5C01 MOV.W   #0x5a80, &0x15c
+     12          
+     13            unsigned int sum=50;
+   \   000006   36403200     MOV.W   #0x32, R6
+     14            unsigned long long ans=169;
+   \   00000A   3840A900     MOV.W   #0xa9, R8
+   \   00000E   0943         MOV.W   #0x0, R9
+   \   000010   0A43         MOV.W   #0x0, R10
+   \   000012   0B43         MOV.W   #0x0, R11
+     15            ans = multi(9999,9999,9999,9999);
+   \   000014   3F400F27     MOV.W   #0x270f, R15
+   \   000018   3E400F27     MOV.W   #0x270f, R14
+   \   00001C   3D400F27     MOV.W   #0x270f, R13
+   \   000020   3C400F27     MOV.W   #0x270f, R12
+   \   000024   ........     CALLA   #multi
+   \   000028   084C         MOV.W   R12, R8
+   \   00002A   094D         MOV.W   R13, R9
+   \   00002C   0A4E         MOV.W   R14, R10
+   \   00002E   0B4F         MOV.W   R15, R11
+     16            sum = digital_sum(ans);
+   \   000030   0C48         MOV.W   R8, R12
+   \   000032   0D49         MOV.W   R9, R13
+   \   000034   0E4A         MOV.W   R10, R14
+   \   000036   0F4B         MOV.W   R11, R15
+   \   000038   ........     CALLA   #digital_sum
+   \   00003C   064C         MOV.W   R12, R6
+     17            LED_blink(sum);
+   \   00003E   0C46         MOV.W   R6, R12
+   \   000040   ........     CALLA   #LED_blink
+     18            while(1);
+   \                     ??main_0:
+   \   000044   FF3F         JMP     ??main_0
+   \   000046   0343         NOP
+   \   000048                REQUIRE _A_WDTCTL
+     19            return 0;
+     20          }
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   main
+        4   -> LED_blink
+        4   -> digital_sum
+        4   -> multi
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  _A_WDTCTL
+      72  main
+
+ 
+ 72 bytes in segment CODE
+  2 bytes in segment DATA16_AN
+ 
+ 72 bytes of CODE memory
+  0 bytes of DATA memory (+ 2 bytes shared)
+
+Errors: none
+Warnings: 1

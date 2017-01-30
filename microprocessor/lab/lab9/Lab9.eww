@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\..\Lab10\Lab10.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\Lab9.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\..\&#x4F5C;&#x696D;\HW2\C14031162_HW2\LED_blink\LED_blink.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\..\&#x4F5C;&#x696D;\HW2\C14031162_HW2\multi\multi.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

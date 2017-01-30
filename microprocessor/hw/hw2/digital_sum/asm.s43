@@ -1,0 +1,208 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    digital_sum                    ; module name
+
+        PUBLIC  digital_sum                    ; make the main label vissible
+                                        ; outside this module
+                                        
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+        
+adddig  MACRO
+LOCAL   calcR8_4
+LOCAL   calcR8_3
+LOCAL   calcR8_2
+LOCAL   calcR8_1
+LOCAL   LOOP
+LOCAL   GOODBYE
+        ;digital numbers store in stack
+        ;for example 3158
+        ;8 in 0(SP) , 5 in 2(SP) , 1 in 4(SP) , 3 in 6(SP)
+        ;這邊把超過10的數字進位
+        mov.w   SP,R8
+LOOP:
+        cmp.w   #0,0(R8)        ;如果已經跑到某個位數為0，不可能再進位，就結束了
+        jz      GOODBYE
+calcR8_4:                       ;扣10000，進位1000
+        sub.w   #10000,0(R8)
+        add.w   #1000,2(R8)
+        cmp.w   #0,0(R8)
+        jge   calcR8_4
+       
+        sub.w   #1000,2(R8)     ;多進位一次，補回來
+        add.w   #10000,0(R8)
+        
+calcR8_3:                       ;扣1000，進位100
+        sub.w   #1000,0(R8)
+        add.w   #100,2(R8)
+        cmp.w   #0,0(R8)
+        jge   calcR8_3
+        
+        sub.w   #100,2(R8)     ;多進位一次，補回來
+        add.w   #1000,0(R8)
+        
+calcR8_2:                       ;扣100，進位10
+        sub.w   #100,0(R8)
+        add.w   #10,2(R8)
+        cmp.w   #0,0(R8)
+        jge   calcR8_2
+        
+        sub.w   #10,2(R8)     ;多進位一次，補回來
+        add.w   #100,0(R8)
+        
+calcR8_1:                       ;扣10，進位1
+        sub.w   #10,0(R8)
+        add.w   #1,2(R8)
+        cmp.w   #0,0(R8)
+        jge   calcR8_1
+        
+        sub.w   #1,2(R8)     ;多進位一次，補回來
+        add.w   #10,0(R8)
+                
+        add.w   #2,R8           ;往下一個位數檢查
+        jmp     LOOP
+        
+GOODBYE:
+        
+        ENDM
+
+
+
+
+
+digital_sum:
+        ;push registers will be used
+        sub.w   #14,SP
+        mov.w   R4,0(SP)
+        mov.w   R5,2(SP)
+        mov.w   R6,4(SP)
+        mov.w   R7,6(SP)
+        mov.w   R8,8(SP)
+        mov.w   R10,10(SP)
+        mov.w   R11,12(SP)
+        ;copy parameters
+        mov.w   R12,R4
+        mov.w   R13,R5
+        mov.w   R14,R6
+        mov.w   R15,R7
+        ;take enough stack, and clear
+        sub.w   #128,SP
+        mov.w   #60,R11
+        mov.w   SP,R10
+LOOP_CLR:
+        clr     0(R10)
+        add.w   #2,R10
+        sub.w   #1,R11
+        jnz     LOOP_CLR
+        
+        ;parameter 15-0 bits
+        ;1
+        mov.w   R4,0(SP)
+        adddig
+        
+        ;parameter 31-16 bits
+        ;total 65 536(2^16) * R5
+        clr     R10
+LOOP_R5:
+        cmp.w   #0,R5
+        jz      OUT_R5
+        sub.w   #1,R5
+        add.w   #6,0(SP)
+        add.w   #3,2(SP)
+        add.w   #5,4(SP)
+        add.w   #5,6(SP)
+        add.w   #6,8(SP)
+        add.w   #1,R10
+        cmp.w   #5000,R10
+        jz      ADDDIG_R5
+        jmp     LOOP_R5
+ADDDIG_R5:
+        adddig
+        clr     R10
+        jmp     LOOP_R5
+OUT_R5:
+        
+        ;parameter 47-32 bits
+        ;total 4 294 967 296(2^32) * R6
+LOOP_R6:
+        cmp.w   #0,R6
+        jz      OUT_R6
+        sub.w   #1,R6
+        add.w   #6,0(SP)
+        add.w   #9,2(SP)
+        add.w   #2,4(SP)
+        add.w   #7,6(SP)
+        add.w   #6,8(SP)
+        add.w   #9,10(SP)
+        add.w   #4,12(SP)
+        add.w   #9,14(SP)
+        add.w   #2,16(SP)
+        add.w   #4,18(SP)
+        add.w   #1,R10
+        cmp.w   #5000,R10
+        jz      ADDDIG_R6
+        jmp     LOOP_R6
+ADDDIG_R6:
+        adddig
+        clr     R10
+        jmp     LOOP_R6
+OUT_R6:
+        
+        ;parameter 63-48 bits
+        ;total 281 474 976 710 656(2^48) * R7
+LOOP_R7:
+        cmp.w   #0,R7
+        jz      OUT_R7
+        sub.w   #1,R7
+        add.w   #6,0(SP)
+        add.w   #5,2(SP)
+        add.w   #6,4(SP)
+        add.w   #0,6(SP)
+        add.w   #1,8(SP)
+        add.w   #7,10(SP)
+        add.w   #6,12(SP)
+        add.w   #7,14(SP)
+        add.w   #9,16(SP)
+        add.w   #4,18(SP)
+        add.w   #7,20(SP)
+        add.w   #4,22(SP)
+        add.w   #1,24(SP)
+        add.w   #8,26(SP)
+        add.w   #2,28(SP)
+        add.w   #1,R10
+        cmp.w   #5000,R10
+        jz      ADDDIG_R7
+        jmp     LOOP_R7
+ADDDIG_R7:
+        adddig
+        clr     R10
+        jmp     LOOP_R7
+OUT_R7:
+        
+        ;add 60 digits in stack
+        adddig
+        mov.w   #60,R11
+        mov.w   SP,R10
+        clr.w   R12
+LOOP_ADD:
+        add.w   0(R10),R12
+        add.w   #2,R10
+        sub.w   #1,R11
+        jnz     LOOP_ADD
+        
+        add.w   #128,SP
+        
+        ;restore registers
+        mov.w   0(SP),R4
+        mov.w   2(SP),R5
+        mov.w   4(SP),R6
+        mov.w   6(SP),R7
+        mov.w   8(SP),R8
+        mov.w   10(SP),R10
+        mov.w   12(SP),R11
+        add.w   #14,SP
+        ret
+        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

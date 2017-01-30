@@ -1,0 +1,67 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        ORG    0FFEAh
+        DW      CCIFG0_ISR
+        
+        ORG    0FFE0h
+        DW      TIMER1_A1_ISR
+        
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE  
+                  ; place program in 'CODE' segment
+
+TIMER1_A1_ISR:
+        xor.b   #00000001b,&P1OUT
+        Mov.w  R5, &TA1R
+        bic.w   #00000001b,TA1CTL
+        reti
+
+CCIFG0_ISR:
+        bic.w   #0000000000000010b,&TA1CTL
+        Mov.w &TA0CCR0, R5
+        bis.w   #0000000000000010b,&TA1CTL
+        reti
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+ 
+        ;LED setup
+        bic.b   #00000001b,&P1SEL
+        bis.b   #00000001b,&P1DIR
+        bic.b   #00000001b,&P1OUT
+        
+        mov.w #32768, R5
+        
+        ;Button setup to module mode
+        bis.b   #00000010b,&P1OUT
+        bis.b   #00000010b,&P1REN
+    //  bis.b   #00000010b,&P1IE   //不需要開啟P1 interrupt因為是用timer的interrupt
+        bis.b   #00000010b,&P1SEL   //設定P1.1為周邊模組
+        
+        ;TimerA0 setup
+        // ACLK, cont mode
+        //set CCIE, capture mode register setting
+        mov.w   #0000000100100100b,&TA0CTL
+        mov.w   #CAP+CCIS_0+CCIE+SCS+CM_1, &TA0CCTL0
+        mov.w   #0,&TA0CCR0
+        
+        
+        ;TimerA1 setup
+         // ACLK, contmode set TAIE
+        mov.w   #0000000100100110b,&TA1CTL // ACLK, contmode, set TAIE
+        
+        nop
+        bis.w   #GIE,SR
+        nop        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

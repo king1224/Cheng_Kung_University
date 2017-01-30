@@ -1,0 +1,69 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    multi                    ; module name
+
+        PUBLIC  multi                    ; make the main label vissible
+        
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+multi:
+        mov.w R12,&MPY
+        mov.w R13,&OP2  ;a*b
+        mov.w &RESLO,R4 ;a*b 低位
+        mov.w &RESHI,R5 ;a*b 高位
+        mov.w R14,&MPY
+        mov.w R15,&OP2  ;c*d
+        mov.w &RESLO,R6 ;c*d 低位
+        mov.w &RESHI,R7 ;c*d 高位
+        
+        clr R12
+        clr R13
+        clr R14
+        clr R15
+        
+        ;LOW * LOW => 31-0 bits
+        mov.w R4,&MPY
+        mov.w R6,&OP2
+        add.w &RESLO,R12
+        add.w &RESHI,R13
+        
+        ;LOW * HIGH => 47-16 bits
+        mov.w R4,&MPY
+        mov.w R7,&OP2
+        add.w &RESLO,R13
+        jnc   NOADDR14  ;handle carry
+        add.w #1,R14
+NOADDR14:
+        add.w &RESHI,R14
+        jnc   NOADDR15  ;handle carry
+        add.w #1,R15
+NOADDR15:
+        
+        ;HIGH * LOW => 47-16 bits
+        mov.w R5,&MPY
+        mov.w R6,&OP2
+        add.w &RESLO,R13
+        jnc   NOADDR142  ;handle carry
+        add.w #1,R14
+NOADDR142:
+        add.w &RESHI,R14
+        jnc   NOADDR152  ;handle carry
+        add.w #1,R15
+NOADDR152:
+        
+        ;HIGH * HIGH => 63-32 bits
+        mov.w R5,&MPY
+        mov.w R7,&OP2
+        add.w &RESLO,R14
+        jnc   NOADDR153  ;handle carry
+        add.w #1,R15
+NOADDR153:
+        add.w &RESHI,R15
+        
+        
+        
+        ret
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

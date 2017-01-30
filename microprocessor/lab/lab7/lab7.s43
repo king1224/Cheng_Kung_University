@@ -1,0 +1,41 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        ORG     0FFE0h
+        DW      TIMER1_A1_ISR
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE  
+                  ; place program in 'CODE' segment
+
+TIMER1_A1_ISR:
+        xor.b   #00000001b,&P1OUT
+        mov.w   #32768,TA1R
+        bic.w   #00000001b,TA1CTL            ;clearing the TAIFG (flag)
+        reti
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        
+        ;LED setup
+        bic.b   #00000001b,&P1SEL
+        bis.b   #00000001b,&P1DIR
+        bic.b   #00000001b,&P1OUT
+     
+        ;TimerA1 setup
+        mov.w   #0000000100100110b,&TA1CTL // ACLK, contmode, set TAIE
+        mov.w   #32768,TA1R
+        nop
+        bis.w   #GIE,SR
+        nop        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

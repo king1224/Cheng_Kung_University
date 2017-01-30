@@ -1,0 +1,310 @@
+################################################################################
+#                                                                              #
+#      IAR Universal Linker V6.4.6.89                                          #
+#                                                                              #
+#           Link time     =  21/Dec/2016  14:52:16                             #
+#           Target CPU    =  MSP430                                            #
+#           List file     =  D:\105上課程\微算機原理與應用\聖誕專題\Quick_Swit #
+#                            ch\Debug\List\Quick_Switch.map                    #
+#           Output file 1 =  D:\105上課程\微算機原理與應用\聖誕專題\Quick_Swit #
+#                            ch\Debug\Exe\Quick_Switch.d43                     #
+#                            Format: ubrof10                                   #
+#                            UBROF version 10.0.6                              #
+#                            Using library modules for C-SPY (-rt)             #
+#           Command line  =  D:\105上課程\微算機原理與應用\聖誕專題\Quick_Swit #
+#                            ch\Debug\Obj\asm.r43                              #
+#                            -o                                                #
+#                            D:\105上課程\微算機原理與應用\聖誕專題\Quick_Swit #
+#                            ch\Debug\Exe\Quick_Switch.d43                     #
+#                            -l                                                #
+#                            D:\105上課程\微算機原理與應用\聖誕專題\Quick_Swit #
+#                            ch\Debug\List\Quick_Switch.map                    #
+#                            -xms                                              #
+#                            "-ID:\IAR Systems\Embedded Workbench 7.4\430\LIB\ #
+#                            "                                                 #
+#                            -f                                                #
+#                            "D:\IAR Systems\Embedded Workbench 7.4\430\config #
+#                            \linker\lnk430f5529.xcl"                          #
+#                            (-cmsp430 -D?CPU30_OFFSET=2 -QCODE_I=CODE_ID      #
+#                            -QTLS16_I=TLS16_ID -D__iar_HWMUL=4C0              #
+#                            -Z(CONST)INFO=1800-19FF                           #
+#                            -Z(CONST)INFOA=1980-19FF                          #
+#                            -Z(CONST)INFOB=1900-197F                          #
+#                            -Z(CONST)INFOC=1880-18FF                          #
+#                            -Z(CONST)INFOD=1800-187F                          #
+#                            -Z(DATA)USBRAM=1C00-23FF                          #
+#                            -Z(DATA)DATA16_I,DATA16_Z,DATA16_N,TLS16_I=2400-4 #
+#                            3FF                                               #
+#                            -Z(DATA)DATA16_HEAP+_DATA16_HEAP_SIZE             #
+#                            -Z(DATA)CODE_I                                    #
+#                            -Z(DATA)DATA20_I,DATA20_Z,DATA20_N,DATA20_HEAP+_D #
+#                            ATA20_HEAP_SIZE                                   #
+#                            -Z(DATA)CSTACK+_STACK_SIZE#                       #
+#                            -Z(CONST)DATA16_C,DATA16_ID,TLS16_ID,DIFUNCT,CHEC #
+#                            KSUM=4400-FF7F                                    #
+#                            -Z(CODE)CSTART,ISR_CODE,CODE16=4400-FF7F          #
+#                            -P(CODE)CODE=4400-FF7F,10000-243FF                #
+#                            -Z(CONST)DATA20_C,DATA20_ID,CODE_ID=4400-FF7F,100 #
+#                            40-243FF                                          #
+#                            -Z(CODE)INTVEC=FF80-FFFF                          #
+#                            -Z(CODE)RESET=FFFE-FFFF) -f                       #
+#                            "D:\IAR Systems\Embedded Workbench 7.4\430\config #
+#                            \linker\multiplier32.xcl"                         #
+#                            (-e?Mul8Hw=?Mul8 -e?Mul16Hw=?Mul16                #
+#                            -e?Mul16to32uHw=?Mul16to32u                       #
+#                            -e?Mul16to32sHw=?Mul16to32s -e?Mul32Hw32=?Mul32   #
+#                            -e?Mul64Hw32=_Mul64i                              #
+#                            -e?Mul32u32uto64iHw32=_Mul32u32uto64i             #
+#                            -e?Mul32fHw32=_Mul32f                             #
+#                            -e_Mul64fHw32Ptr=_Mul64fPtr) -D_STACK_SIZE=A0     #
+#                            -rt -D_DATA16_HEAP_SIZE=A0                        #
+#                            -D_DATA20_HEAP_SIZE=50                            #
+#                                                                              #
+#                           Copyright (C) 1987-2016 IAR Systems AB.            #
+################################################################################
+
+
+
+
+
+                ****************************************
+                *                                      *
+                *           CROSS REFERENCE            *
+                *                                      *
+                ****************************************
+
+                  There are no program entries.
+
+
+                ****************************************
+                *                                      *
+                *    AUTOMATIC SYMBOL REDIRECTIONS     *
+                *                                      *
+                ****************************************
+
+                  There are no automatic symbol redirections.
+
+
+
+                ****************************************
+                *                                      *
+                *              MODULE MAP              *
+                *                                      *
+                ****************************************
+
+
+  DEFINED ABSOLUTE ENTRIES
+    *************************************************************************
+
+  DEFINED ABSOLUTE ENTRIES
+  PROGRAM MODULE, NAME : ?ABS_ENTRY_MOD
+
+Absolute parts
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           _DATA20_HEAP_SIZE       0050 
+           _DATA16_HEAP_SIZE       00A0 
+           _STACK_SIZE             00A0 
+           __iar_HWMUL             04C0 
+           ?CPU30_OFFSET           0002 
+    *************************************************************************
+
+  FILE NAME : D:\105上課程\微算機原理與應用\聖誕專題\Quick_Switch\Debug\Obj\asm.r43
+  PROGRAM MODULE, NAME : main
+
+Absolute parts
+     FFFE - FFFF
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           __MSP430P112__          0000 
+  SEGMENTS IN THE MODULE
+  ======================
+CSTACK
+  Relative segment, address: 4360, align: 1
+  Segment part 0. ROOT 
+    -------------------------------------------------------------------------
+<CODE> 1 (was CODE)
+  Relative segment, address: 4400 - 791D (0x351e bytes), align: 1
+  Segment part 1. ROOT        Intra module refs:   Absolute parts
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           main                    4404 
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           init                    4400 
+           CLEAR                   75AC 
+           START                   4480 
+           QS                      6D8E 
+           SD_CIRCLE               62E6 
+           SD_CIRCLE_END           65C8 
+           SD_CIRCLE_SPEED_UP      659C 
+           SUD_CIRCLE              65D4 
+           SUD_CIRCLE_END          68B6 
+           SUD_CIRCLE_SPEED_UP     688A 
+           SU_CIRCLE               68CA 
+           SU_CIRCLE_END           6D8A 
+           SU_CIRCLE_SPEED_UP      6D84 
+           LEVEL1                  6DAC 
+           NXT2                    6DDE 
+           L1E                     6DD8 
+           L1S                     6DD2 
+           LEVEL2                  6E02 
+           NXT3                    6E34 
+           L2E                     6E2E 
+           L2S                     6E28 
+           LEVEL3                  6E58 
+           NXT4                    6E8A 
+           L3E                     6E84 
+           L3S                     6E7E 
+           LEVEL4                  6EAE 
+           NXT5                    6EE0 
+           L4E                     6EDA 
+           L4S                     6ED4 
+           LEVEL5                  6F04 
+           NXT6                    6F36 
+           L5E                     6F30 
+           L5S                     6F2A 
+           LEVEL6                  6F5A 
+           NXT7                    6F8C 
+           L6E                     6F86 
+           L6S                     6F80 
+           LEVEL7                  6FB0 
+           NXT8                    6FE2 
+           L7E                     6FDC 
+           L7S                     6FD6 
+           LEVEL8                  7006 
+           LEVEL_END               7038 
+           L8E                     7032 
+           L8S                     702C 
+           CL1                     70D0 
+           CL2                     7168 
+           IC_L                    7642 
+           CK_IC_1_0               70E0 
+           CK_IC_2_0               70F0 
+           IC_1                    768E 
+           CK_IC_3_0               7100 
+           IC_2                    76D8 
+           CK_IC_4_0               7110 
+           IC_3                    7724 
+           CK_IC_5_0               7120 
+           IC_4                    7770 
+           CK_IC_6_0               7130 
+           IC_5                    77C0 
+           CK_IC_7_0               7140 
+           IC_6                    780A 
+           CK_IC_8_0               7150 
+           IC_7                    7856 
+           CK_IC_9_0               7160 
+           IC_8                    78A8 
+           CL3                     7200 
+           CK_IC_1_1               7178 
+           CK_IC_2_1               7188 
+           CK_IC_3_1               7198 
+           CK_IC_4_1               71A8 
+           CK_IC_5_1               71B8 
+           CK_IC_6_1               71C8 
+           CK_IC_7_1               71D8 
+           CK_IC_8_1               71E8 
+           CK_IC_9_1               71F8 
+           CL4                     7298 
+           CK_IC_1_2               7210 
+           CK_IC_2_2               7220 
+           CK_IC_3_2               7230 
+           CK_IC_4_2               7240 
+           CK_IC_5_2               7250 
+           CK_IC_6_2               7260 
+           CK_IC_7_2               7270 
+           CK_IC_8_2               7280 
+           CK_IC_9_2               7290 
+           CL5                     7330 
+           CK_IC_1_3               72A8 
+           CK_IC_2_3               72B8 
+           CK_IC_3_3               72C8 
+           CK_IC_4_3               72D8 
+           CK_IC_5_3               72E8 
+           CK_IC_6_3               72F8 
+           CK_IC_7_3               7308 
+           CK_IC_8_3               7318 
+           CK_IC_9_3               7328 
+           CL6                     73CA 
+           CK_IC_1_4               7342 
+           CK_IC_2_4               7352 
+           CK_IC_3_4               7362 
+           CK_IC_4_4               7372 
+           CK_IC_5_4               7382 
+           CK_IC_6_4               7392 
+           CK_IC_7_4               73A2 
+           CK_IC_8_4               73B2 
+           CK_IC_9_4               73C2 
+           CL7                     7464 
+           CK_IC_1_5               73DC 
+           CK_IC_2_5               73EC 
+           CK_IC_3_5               73FC 
+           CK_IC_4_5               740C 
+           CK_IC_5_5               741C 
+           CK_IC_6_5               742C 
+           CK_IC_7_5               743C 
+           CK_IC_8_5               744C 
+           CK_IC_9_5               745C 
+           CL8                     74FE 
+           CK_IC_1_6               7476 
+           CK_IC_2_6               7486 
+           CK_IC_3_6               7496 
+           CK_IC_4_6               74A6 
+           CK_IC_5_6               74B6 
+           CK_IC_6_6               74C6 
+           CK_IC_7_6               74D6 
+           CK_IC_8_6               74E6 
+           CK_IC_9_6               74F6 
+           CL9                     7598 
+           CK_IC_1_7               7510 
+           CK_IC_2_7               7520 
+           CK_IC_3_7               7530 
+           CK_IC_4_7               7540 
+           CK_IC_5_7               7550 
+           CK_IC_6_7               7560 
+           CK_IC_7_7               7570 
+           CK_IC_8_7               7580 
+           CK_IC_9_7               7590 
+           CL10                    75A0 
+           RUN                     7600 
+           Loop                    760A 
+           SHIFT                   7632 
+           L_SHIFT                 7634 
+           E_SHIFT                 763E 
+           DELAY                   78F2 
+           DLOOP                   78F6 
+           EXIT                    7918 
+           loop1                   78FE 
+           EXIT2                   7914 
+           loop2                   7908 
+           EXIT1                   7910 
+
+
+
+
+                ****************************************
+                *                                      *
+                *      SEGMENTS IN ADDRESS ORDER       *
+                *                                      *
+                ****************************************
+
+
+SEGMENT              SPACE    START ADDRESS   END ADDRESS     SIZE  TYPE  ALIGN
+=======              =====    =============   ===========     ====  ====  =====
+CSTACK                                 4360 - 43FF              A0   rel    1
+<CODE> 1                               4400 - 791D            351E   rel    1
+                                       FFFE - FFFF               2  aseg  
+
+                ****************************************
+                *                                      *
+                *        END OF CROSS REFERENCE        *
+                *                                      *
+                ****************************************
+
+ 13 598 bytes of CODE memory (+ 2 absolute )
+    160 bytes of DATA memory
+
+Errors: none
+Warnings: none
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\..\..\&#x5Be6;&#x9A57;\Lab7_sample\Lab7-2.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\..\&#x5Be6;&#x9A57;\Lab7_sample\Lab7-3.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\..\&#x5Be6;&#x9A57;\Lab8\Lab8_sample.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\Servo_Motor\Server_Motor_V1.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\servo_motor_v2.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

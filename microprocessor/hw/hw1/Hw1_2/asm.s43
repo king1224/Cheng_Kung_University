@@ -1,0 +1,134 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+        ORG     1000h                   ; 1000~100f存letter1的摩斯密碼
+        DW      0,1,1,1,1               ; 0代表dot，1代表dash
+        ORG     1010h                   ; 1010~101f存letter2的摩斯密碼
+        DW      0,0,1,1,1               ; 後面3~0依此類推
+        ORG     1020h
+        DW      0,0,0,1,1
+        ORG     1030h
+        DW      0,0,0,0,1
+        ORG     1040h
+        DW      0,0,0,0,0
+        ORG     1050h
+        DW      1,0,0,0,0
+        ORG     1060h
+        DW      1,1,0,0,0
+        ORG     1070h
+        DW      1,1,1,0,0
+        ORG     1080h
+        DW      1,1,1,1,0
+        ORG     1090h
+        DW      1,1,1,1,1
+        ORG     10a0h                   ; 輸入字串儲存在10a0
+        DW      "123987\0"
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+        Mov.w   #10a0h,R5               ; 從10a0開始處理輸入
+        CLR     R12
+
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        
+Start:        
+        cmp.b   #31h,0(R5)              ; Switch Case 1~0 和 空白
+        Jz      Num1
+        cmp.b   #32h,0(R5)
+        Jz      Num2
+        cmp.b   #33h,0(R5)
+        Jz      Num3
+        cmp.b   #34h,0(R5)
+        Jz      Num4
+        cmp.b   #35h,0(R5)
+        Jz      Num5
+        cmp.b   #36h,0(R5)
+        Jz      Num6
+        cmp.b   #37h,0(R5)
+        Jz      Num7
+        cmp.b   #38h,0(R5)
+        Jz      Num8
+        cmp.b   #39h,0(R5)
+        Jz      Num9
+        cmp.b   #30h,0(R5)
+        Jz      Num0
+        cmp.b   #20h,0(R5)
+        Jz      Space
+        Jmp     CalcEnd
+Num1:   CLR     R6                      ; 若輸入為1，則從1000開始查table
+        add.w   #1000h,R6
+        Jmp     Calc
+Num2:   CLR     R6                      ; 若輸入為2，則從1010開始查table
+        add.w   #1010h,R6               ; 後面3~0依此類推
+        Jmp     Calc
+Num3:   CLR     R6
+        add.w   #1020h,R6
+        Jmp     Calc
+Num4:   CLR     R6
+        add.w   #1030h,R6
+        Jmp     Calc
+Num5:   CLR     R6
+        add.w   #1040h,R6
+        Jmp     Calc
+Num6:   CLR     R6
+        add.w   #1050h,R6
+        Jmp     Calc
+Num7:   CLR     R6
+        add.w   #1060h,R6
+        Jmp     Calc
+Num8:   CLR     R6
+        add.w   #1070h,R6
+        Jmp     Calc
+Num9:   CLR     R6
+        add.w   #1080h,R6
+        Jmp     Calc
+Num0:   CLR     R6
+        add.w   #1090h,R6
+        Jmp     Calc
+
+Calc:   mov.w   #6,R7                   ; 將table所需的長度累加起來
+For:    sub.w   #1,R7                   ; for迴圈要做五次
+        Jz      CalcEnd
+        cmp     #0,0(R6)                ; 遇到dot
+        Jz      adddot
+        cmp     #1,0(R6)                ; 遇到dash
+        Jz      adddash
+        
+adddot:                                 ; 每個dot dash間需要接上1長度
+        add.w   #2,R6                   ; 直接把dot算2長度
+        add.w   #2,R12
+        Jmp     For     
+adddash:
+        add.w   #2,R6                   ; 直接把dash算4長度
+        add.w   #4,R12
+        Jmp     For
+
+Space:  add.w   #1,R5                   ; 遇到space需要+7
+        add.w   #4,R12                  ; 但letter後面都已經+3了，再+4即可
+        cmp.b   #0,0(R5)                ; 判斷是否讀到字串結尾
+        Jnz     Start
+        sub.w   #4,R12                  ; 若空白在結尾前，則把剛剛加的減回去
+        Jmp     Final
+
+CalcEnd:                                ; 每個letter的最後一個dot(dash)會多算1長度
+        add.w   #1,R5                   ; 因此letter間要 -1+3 => +2 即可
+        add.w   #2,R12
+        cmp.b   #0,0(R5)                ; 判斷是否讀到字串結尾
+        Jnz     Start
+        
+Final:  sub.w   #3,R12                  ; 每個letter後面都會+3，結尾前的letter要-3
+        
+
+        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

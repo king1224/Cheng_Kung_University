@@ -1,0 +1,84 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    LED_blink                    ; module name
+
+        PUBLIC  LED_blink                    ; make the main label vissible
+                                        ; outside this module
+
+        ORG     0FFEAh
+        DW      CCIFG0_ISR
+        
+        ORG     0FFE2h
+        DW      CCIFG1_ISR
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+CCIFG0_ISR:
+        cmp.b   #0,R12
+        jz      TIMER0_OUT
+        xor.b   #00000001b,&P1OUT
+        sub.w   #1,R12
+TIMER0_OUT:
+        reti
+        
+CCIFG1_ISR:
+        cmp.b   #0,R13
+        jz      TIMER1_OUT
+        xor.b   #10000000b,&P4OUT
+        sub.w   #1,R13
+TIMER1_OUT:
+        reti
+        
+LED_blink:
+        
+        mov.w   R12,R13                         ;copy parameter to R13
+        bic.b   #11110000b,R12                  ;R12 for LED1
+        bic.b   #00001111b,R13                  ;R13 for LED2
+        ;cause Timer interrupt is toggle the LED
+        ;we total need to get in ISR 2n-1 times
+        rra.w   R13     ;rra*4 + rla*1 = rra*3
+        rra.w   R13
+        rra.w   R13
+        rla.w   R12
+        sub.w   #1,R12
+        sub.w   #1,R13
+        
+        
+        ;LED setup
+        bic.b   #00000001b,&P1SEL
+        bis.b   #00000001b,&P1DIR
+        bis.b   #00000001b,&P1OUT
+        bic.b   #10000000b,&P4SEL
+        bis.b   #10000000b,&P4DIR
+        bis.b   #10000000b,&P4OUT
+     
+        ;TimerA setup
+        mov.w   #0000000100010100b,&TA0CTL // ACLK, up mode
+        mov.w   #0000000100010100b,&TA1CTL // ACLK, up mode
+        mov.w   #CCIE, &TA0CCTL0        //set CCIE
+        mov.w   #CCIE, &TA1CCTL0        //set CCIE
+        mov.w   #19661,&TA0CCR0         ;0.6s threshold
+        mov.w   #9830,&TA1CCR0          ;0.3s threshold
+        nop
+        bis.w   #GIE,SR
+        
+        
+        ;if R12,R13==0 , disable inturrupt
+LOOP:
+        cmp.b   #0,R12
+        jnz     LOOP
+        cmp.b   #0,R13
+        jnz     LOOP
+        
+        mov.w   #0, &TA0CCTL0        //clr CCIE
+        mov.w   #0, &TA1CCTL0        //clr CCIE
+        bic.b   #00000001b,&P1OUT       ;turn off LED
+        bic.b   #10000000b,&P4OUT
+        
+        
+        ret
+        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END

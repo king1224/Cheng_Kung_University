@@ -1,0 +1,43 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    LED                    ; module name
+
+        PUBLIC  LED                    ; make the main label vissible
+                                        ; outside this module
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+delay   MACRO
+LOCAL   for
+LOCAL   for2
+LOCAL   GoodBye
+        mov     #500,R4
+for:    
+        sub     #1,R4
+        jz      GoodBye
+        mov     #500,R5
+for2:   
+        sub     #1,R5
+        jz      for
+        jmp     for2
+GoodBye:
+        ENDM
+
+LED:
+        mov.b   #1b,P1DIR
+        mov.b   #0b,P1SEL
+        mov.b   #10000000b,P4DIR
+        mov.b   #0b,P4SEL
+        
+        mov.b   #1b,P1OUT
+        mov.b   #0b,P4OUT
+        delay
+        mov.b   #0b,P1OUT
+        mov.b   #10000000b,P4OUT
+        delay
+
+        ret
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END
