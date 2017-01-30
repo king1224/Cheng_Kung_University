@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- Template by quackit.com -->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>tab4</title>
+	<link rel="stylesheet" href="tab4_css.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+	<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+	<link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet">
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+	<script src="tab4_js.js"></script>	
+</head>
+
+<body>
+
+	<header id="header"><p>Programming Language Final Report</p></header>
+
+	<div id="container">
+
+		<main id="center" class="column">
+			<article>
+			
+				<h1>Subprogram/Function</h1>
+				<p>在jQuery的實作中，可以用到subprogram and function，不過嚴格來說，這些是javascript中的機制，如同先前說的，jQuery本身是在javascript下執行的函式庫，所以jQuery是沒有這些功能的，以下給出一些利用這些javascript的功能再套用jQuery這個函式庫所做出的小範例。</p>
+				<h1>Nested</h1>
+				<script src="https://gist.github.com/anonymous/0f145b2d45e894fd2bd67276038d9959.js"></script><br/>
+				<p>這是一個三層nested的程式碼範例，最外層是"on"，中間呼叫到"animate"再往下呼叫"hide"、"show"、"text"。</p>
+				<br/>
+				<br/>
+				
+				<h1>Parameter Passing Method (Passing by Value , Reference and Name)</h1>
+				<h4>Passing by Value：</h4>
+				<script src="https://gist.github.com/anonymous/1ecbc57ec148d3de3175113650419d81.js"></script>
+				<p>這裡的"Click it!"預設方式即為傳值。</p>
+				<br/>
+				<h4>Passing by Reference：</h4>
+				<script src="https://gist.github.com/anonymous/5dd61236a8113c6617a6a9998a40cb69.js"></script>
+				<p>*本題答案為667*</p>
+				<p>若code照順序run下來，第三行時say應為666，但在第四行num++以後，才在第7行呼叫此function，故印出"666++"的值，所以第四行值的改變，造成第三行值也改變，故第三行為pass by reference。</p>
+				<br/>
+				<h4>Passing by Name：</h4>
+				<script src="https://gist.github.com/anonymous/cb0902ac164bb6687d9bfeeafba91197.js"></script>
+				<p>可以看到在第三行中apply呼叫了add這個function，將add這個funciton name直接當參數傳遞給apply( )的動作就是pass by name。</p>
+				<br/>
+				<br/>
+				<p>但下方這三點功能不只jQuery無法實作，連javascript中也沒有這些功能</p>
+				<ol>
+					<li>Overloaded Subprograms</li>
+					<li>Generic Subprograms</li>
+					<li>Coroutines</li>
+				</ol>
+				<br/>
+				<br/>
+				<br/>
+				<h1>Conditional/Iterative Statement</h1>
+				<h4>Conditional Statement</h4>
+				<p><li>if/else example：</li></p>
+				<script src="https://gist.github.com/anonymous/80ab83ac6e018d5c6c3071d69e0fcdb2.js"></script>
+				<p>如果foo>3，就會跟老師打招呼，否則跟助教打招呼。</p>
+				<br/>
+				<p><li>switch example：</li></p>
+				<script src="https://gist.github.com/anonymous/e66b320eaf4cde18807fa0d0a57b99e3.js"></script>
+				<p>jsLang這個變數的內容是"jquery"字串，故會執行第2~4行。</p>
+				<br/>
+				<br/>
+				<h4>Iterative Statement</h4>
+				<p><li>each example：</li></p>
+				<script src="https://gist.github.com/anonymous/9f6bbbb8dfe74e3972c1ce62ebab187e.js"></script>
+				<p>在HTML中，可能有很多個&#60;li&#62;標籤，each()會讓這些標籤依序執行裡面的code，在此範例中，會將每個&#60;li&#62;的將內容跳出提示框(alert)，但做了5個&#60;li&#62;標籤以後會return false，即為停止這個each() function。</p>
+				<br/>
+				<p><li>for example：</li></p>
+				<script src="https://gist.github.com/anonymous/64117da44a035e935204326807fb730b.js"></script>
+				<p>這個迴圈會執行五次，每次text這個變數一直串接上後面的敘述
+					會變為"Hello teacher 0 &#60;br&#62;Hello teacher 1 &#60;br&#62;Hello teacher 2 &#60;br&#62;Hello teacher 3 &#60;br> Hello teacher 4 &#60;br&#62;" </p>
+				<p>text這個變數便會分別跟老師0~5打招呼
+					註：&#60;br&#62;為HTML中的換行。</p>
+				<br/>
+				<p><li>While example and Do/While example：</li></p>
+				<script src="https://gist.github.com/anonymous/af3b7cc79d4a9ee8e6c0f755959f796b.js"></script>
+				<p>上面的do/while迴圈等同於下面的while迴圈</p>
+				<script src="https://gist.github.com/anonymous/1f5db3027cb94eee489b9c2c1d2a496d.js"></script>
+				<p>do/while迴圈一定會先做一次，才去判斷while內的條件，若條件為真則繼續執行迴圈，反之則離開迴圈。</p>
+				<p>while迴圈則是先判斷條件，若為真才開始執行執行迴圈，每次執行完都會重新判斷條件。
+					在此範例中，第一次條件是為真的，故為先執行或先判斷是沒有區別的！</p>
+				<p>此兩迴圈執行結果皆是text為一串字串"Hello TA 0 Hello TA 1 Hello TA 2 Hello TA 3 Hello TA 4 "
+					text將會與助教0~4打招呼。</p>
+				
+
+			</article>								
+		</main>
+
+		<nav id="left" class="column">
+			<li>Subprogram/Function</li>
+			
+			
+
+		</nav>
+
+		
+
+	</div>
+
+	<div id="footer-wrapper">
+		<footer>  
+  			<p>
+    			<a href="../index.html">homepage</a>  
+  			</p>       
+		</footer>
+	</div>
+
+</body>
+
+</html>

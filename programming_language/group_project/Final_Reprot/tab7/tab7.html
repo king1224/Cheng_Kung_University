@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- Template by quackit.com -->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>tab7</title>
+	<link rel="stylesheet" href="tab7_css.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+	<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+	<link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet">
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+	<script src="tab4_js.js"></script>	
+</head>
+
+<body>
+
+	<header id="header"><p>Programming Language Final Report</p></header>
+
+	<div id="container">
+
+		<main id="center" class="column">
+			<article>
+			
+				<h1>Concurrency</h1>
+				<p>簡單來說是javascript上的機制，要同時用event時會把它放進event queue，一次只能執行一個動作(single-thread)，且每一個event一定會做到結束</p>
+				<p>vent handler(event 執行後)->callback function做一些動作</p>
+				<p>Q：如何讓一個大的event不卡在我的event queue讓後面小的event無法先做？</p>
+				<p>A：增加另一個queue，透過message控制現在該執行哪一個event，輪流的概念</p>
+				<p>嚴格來說jQuery並沒有內建concurrency機制，但在jQery的應用中，有setTimeout()、setInterval()可以使用，這兩個函式都吃兩個參數，第一個參數為"要做的事情"，可以直接傳code也可以傳一整個定義好的function name，第二個參數為延遲多少毫秒。</p>
+				<p>setTimeout：經過某毫秒後執行第一個參數的code(只會執行一次)</p>
+				<p>setInterval ：每經過某毫秒，就執行一次第一個參數(會一直執行)</p>
+				<p>我們覺得如果將前段的code用迴圈加上正確的setTimeout()，可以延遲到與後面的code交替運作，進而達到concurrency的效果。
+</p>
+				
+				
+
+			</article>								
+		</main>
+
+		<nav id="left" class="column">
+			<li>Concurrency </li>
+			
+			
+
+		</nav>
+
+		
+
+	</div>
+
+	<div id="footer-wrapper">
+		<footer>  
+  			<p>
+    			<a href="../index.html">homepage</a>  
+  			</p>       
+		</footer>
+	</div>
+
+</body>
+
+</html>

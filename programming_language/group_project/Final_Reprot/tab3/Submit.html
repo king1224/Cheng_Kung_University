@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>SubmitDemo</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<style  type="text/css">     .help {display: none}   </style>
+	<script>
+		$(document).ready(function(){
+			
+			$("button").click(function(){
+				$('#test').submit(function(event) {
+					if(jQuery('#username').val() == '') {
+					 $("span.help").show();
+				return false;
+    }
+})
+			});
+			
+		});
+	</script>
+	
+	</head>
+<body>
+	<p>Submit Demo</p>
+	<p>Username:</p>
+	<form id="test" action="dosomething.do" method="post">
+		<input type="text" id="username"/>
+		<input type="submit">
+	</form>
+	<span class="help">Please enter Username!</span>  
+	<script src="https://gist.github.com/anonymous/37fbd6cb456203363328b4b10fd6a3f9.js"></script>
+	<button>demo</button>
+	<p>submit為input標籤提交資料後的反應<br>
+	此範例在輸入為空(=="")時，跳出事先寫好的help訊息</p>
+	<p><a href="tab3.html">back</a></p>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- Template by quackit.com -->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>tab3</title>
+	<link rel="stylesheet" href="tab3_css.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+	<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+	<link href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet">
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+	<script src="tab3_js.js"></script>	
+</head>
+
+<body>
+
+	<header id="header"><p>Programming Language Final Report</p></header>
+
+	<div id="container">
+
+		<main id="center" class="column">
+			<article>
+			
+				<h1>基本語法</h1>
+				<h3>在開始jQuery之前，我希望大家先對HTML、CSS有一些基本的認識</h3>
+				<ul>
+					<li><strong>HTML檔</strong></li>
+					<p>HTML是用來做主要的網頁結構，HTML內的資料可再利用javascript來做處理，
+					例如：修改標籤內容，添加視覺效果，故待會的範例幾乎都會是針對HTML內的標籤做動作</p>
+					<p>資料儲存的方式是一種叫做DOM tree的方式，Document Object Model tree，因為是tree的結構，
+					在搜尋標籤(物件)的時候要注意好parents , childs , 甚至是同儕間的位置關係，才能做出正確的選擇，以下為tree的範例
+					</p>
+					<img src="./images/html1.png" id="im">
+					<li><strong>CSS檔</strong></li>
+					<p>CSS可以用來定義單一標籤，或定義一個class讓很多標籤使用，可以設定寬度、高度、圖片、背景......等，
+					就像一份畫好的設計圖，可讓HTML引用</p>
+					<p>CSS語法可以寫在HTML裡面，或者是創立一個.css檔案來儲存，管理與引用上較為方便，一個HTML可同時引用多個.css檔</p>
+				</ul>
+			<p>先前有提到，jQuery僅僅是一套函式庫，那我們要怎麼使用jQuery呢？
+				假設我現在有一份寫好的jQuery code存在jquery-2.2.3.js中
+				或者我要從網路上存取別人寫好存在.js檔中的code
+				那麼我只要在HTML裡面加上下面這段代碼即可
+				就像是C、C++中的 #include</p>
+			<img src="./images/2.png" >
+			<p>jQuery主要是以方便、簡單為主，故大部分.js code都是一份一份寫好的function
+				而又幾乎是用來對HTML做增修，所以code的使用大致上都會像下面這個格式</p>
+			<img src="./images/3.png" id="im">	
+			<p>你可能會在一些地方看到 jQuery("#typo")開頭的code，不用覺得困惑，
+			"jQuery"字串與"$"符號在jQuery的語法中是完全相等的，如果你在code的撰寫上有非常充裕的時間又十分熱愛jQuery的話，
+			不妨捨棄簡易的"$"符號，通通使用"jQuery"字串吧</p>
+			<p>
+				接下來#typo是什麼呢？這是一個在HTML中搜尋到的某一個標籤，
+				是準備被jQuery function做增修的標籤，以下的範例會讓你們更加理解</p>
+			<p>這是一段HTML code ， 和一些搜尋標籤的方式與結果</p>
+			<script src="https://gist.github.com/anonymous/f389c2e86dda1e6b89ece5e1619a37bc.js"></script>
+			<script src="https://gist.github.com/anonymous/b0f83e32e719948ef6a2758bca457db5.js"></script>
+			<p>$("#typo").css("color","red");<br/>
+				其中css就是要呼叫的function，而function的括號內即為需要被增修的屬性或數值，以下列出幾個簡單的jQuery function</p>
+			<table id="table1">
+			  <thead>
+				  <tr>
+					  <th>function</th>
+					  <th>功能</th>
+				  </tr>
+			  </thead>
+			  <tbody>
+				  <tr>
+					  <td>html</td>
+					  <td>判斷標籤是否為空</td>
+				  </tr>
+				  <tr>
+					  <td>replaceWith</td>
+					  <td>取代整個標籤</td>
+				  </tr>
+				  <tr>
+					  <td>setTimeout</td>
+					  <td>取得時間訊號並執行動作</td>
+				  </tr>
+				  <tr>
+					  <td>clone</td>
+					  <td>複製標籤內容</td>
+				  </tr>
+				  <tr>
+					  <td>size</td>
+					  <td>計算有幾個標籤</td>
+				  </tr>
+				  <tr>
+					  <td>append</td>
+					  <td>在標籤內容後面加上字串</td>
+				  </tr>
+				  <tr>
+					  <td>slidedown</td>
+					  <td>將物件可愛的滑下來(飛入)</td>
+				  </tr>
+				  <tr>
+					  <td>mouseover</td>
+					  <td>滑鼠移入此標籤</td>
+				  </tr>
+				  <tr>
+					  <td>mouseout</td>
+					  <td>滑鼠移出此標籤</td>
+				  </tr>
+				  <tr>
+					  <td>mousedown</td>
+					  <td>滑鼠在此標籤上按下</td>
+				  </tr>
+				  <tr>
+					  <td>mouseup</td>
+					  <td>滑鼠在此標籤上釋放</td>
+				  </tr>
+				  <tr>
+					  <td>click</td>
+					  <td>滑鼠在標籤上點擊</td>
+				  </tr>
+				  <tr>
+					  <td>dbclick</td>
+					  <td>滑鼠在標籤上雙擊</td>
+				  </tr>
+				  <tr>
+					  <td>keydown</td>
+					  <td>在標籤被選取時按下鍵盤</td>
+				  </tr>
+			  </tbody>
+			</table>
+			<br/>
+			<br/>
+			<br/>
+			<p>
+			最後我們將提到，如何自己寫出一個jQuery function？
+			定義：<br/>
+				$.fn.myFunctionName =<br/>
+				function(){<br/>
+					…<br/>
+				//要做的事情<br/>
+					…<br/>
+				}<br/>
+			呼叫：<br/>
+				$(“標籤”).myFunctionName();<br/>
+			</p>
+			<p>在myFunctionName中打上自己定義的function name以及在兩個大括號之間打下這個funciton要做的事情即可，
+			呼叫時和一般function一樣，在dot後面打上function name即可
+			以下是一個定義及呼叫的例子，這個例子是將id="Nextpage"的標籤設定在整個視窗的正中央
+			(註：$==jQuery)</p>
+			<img src="./images/f.png" id="im">
+
+			</article>								
+		</main>
+
+		<nav id="left" class="column">
+			<h3>範例</h3>
+			<ul>
+				<li><a href="helloWorld.html">Hello World!</a></li>
+				<li><a href="append.html">Append</a></li>
+				<li><a href="Css.html">CSS</a></li>
+				<li><a href="Submit.html">Submit</a></li>
+				<li><a href="Click.html">Click</a></li>
+				<li><a href="Animate1.html">Animate1</a></li>
+				<li><a href="Animate2.html">Animate2</a></li>
+			</ul>
+
+		</nav>
+
+		
+
+	</div>
+
+	<div id="footer-wrapper">
+		<footer>  
+  			<p>
+    			<a href="../index.html">homepage</a>  
+  			</p>       
+		</footer>
+	</div>
+
+</body>
+
+</html>

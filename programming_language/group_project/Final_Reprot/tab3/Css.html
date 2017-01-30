@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>cSSDemo</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("#target").css({
+				border: "10px solid green",
+				height: "400px",
+				width : "200px",
+				});
+			});
+			
+		});
+	</script>
+	</head>
+<body>
+	<p>Css Demo</p>
+	
+	<div id="target"> Programming </div>
+	<br/>
+	<script src="https://gist.github.com/anonymous/9c3cc85b6b359cf08447176d0dedf47b.js"></script>
+	<button>demo</button>
+	<p>將id為target的標籤改為400像素高，200像素寬，10像素的邊框</p>
+	<p><a href="tab3.html">back</a></p>
+</body>
+</html>

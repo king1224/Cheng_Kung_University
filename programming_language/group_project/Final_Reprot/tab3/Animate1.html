@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Animate1Demo</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<style type="text/css">
+  button#level5 {
+	display: block;
+	width: 220px;
+	height: 80px;
+	margin: 0 10px 20px;
+	font-size: 16px;
+	letter-spacing: .15em;
+	color: #ebc000;
+	background: #fff;
+	border: 1px solid;
+	border-radius: 20px;
+}
+
+  
+  </style>
+	<script>
+		$(document).ready(function(){
+		$(".demo").click(function(){
+			$("#level5").on('mouseover', function () {
+                $(this).css('border-color', '#ae5e9b').stop(true).animate({ borderWidth: "10px", color: "#ae5e9b" });
+            })
+            .on('mouseout', function () {
+                $(this).stop(true).animate({ borderWidth: 0, color: "#ebc000" });
+            });
+		});	
+		});
+	</script>
+	</head>
+<body>
+	<p>Animate1 Demo</p>
+	
+	<button id="level5">jquery</button>
+	<br/>
+	<script src="https://gist.github.com/anonymous/2d6ea6dbb542650c1d5a3d01677d6ca5.js"></script>
+	<button class="demo">demo</button>
+	<p>animate可以使任何改變以漸變的方式形成，他吃兩個參數，第一個參數為執行的事情，第二個參數為執行毫秒數
+	mouseover及mouseout分別為滑鼠移動到標籤上及移動離開標籤
+	此範例滑鼠移動到標籤上時，將背景設為黃色，500毫秒內漸漸地將紫色邊框擴增到10像素
+	當滑鼠移出時，在500毫秒內漸漸的將邊框設為0像素(縮回去)
+	jQuery中的動畫都是按照順序執行的，其中stop(true)用來暫停所有動畫，以馬上執行現在要執行的動畫</p>
+	<p><a href="tab3.html">back</a></p>
+</body>
+</html>

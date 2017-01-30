@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>ClickDemo</title>
+	<style type="text/css">
+	div.d {
+    height: 100px;
+    width: 100px;
+    background-color: #4ECDC4;
+    border-radius: 5px;
+    display: inline-block;
+	}
+	</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("button").click(function(){
+				$(document).ready(function(){
+					$("div").click(function(){
+						$(this).fadeOut(1000);
+					});
+				});
+			});
+		});
+	</script>
+	</head>
+<body>
+	<p>Click Demo</p>
+	<div class="d"></div>
+	<div class="d"></div>
+	<div class="d"></div>
+	<div class="d"></div>
+	<br/>
+	<script src="https://gist.github.com/anonymous/40021964f1b01d6553c2f9ebd7f32159.js"></script>
+	<button>demo</button>
+	<!---<p>第一行為等待HTML加載完成後才執行此function，</p>
+	<p>以免還沒有標籤就在js裡面修改此標籤click為被點擊後的反應<br/>
+	其中$(this).fadeOut(1000)，this為被點擊的標籤，fadeOut(1000)為在1000毫秒內逐漸淡出</p>--->
+	<p><a href="tab3.html">back</a></p>
+</body>
+</html>

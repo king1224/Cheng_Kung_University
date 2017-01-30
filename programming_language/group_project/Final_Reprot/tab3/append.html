@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>AppendDemo</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("a#target2").append("append a!");
+				$("div#target2").append("append div!");
+			});
+		});
+	</script>
+	</head>
+<body>
+	<p>Append Demo</p>
+	<p><a href="https://www.google.com.tw/" id="target2">Google </a></p>
+	<div id="target2">Division </div>
+	<br/>
+	<script src="https://gist.github.com/anonymous/7d19ba8fb4c4bff281cccfa0ba39f61d.js"></script>
+	<button>demo</button>
+	<p>id為target2的a標籤內容後面加上append a!<br/>
+		id為target2的div標籤內容後面加上append div!</p>
+	<p><a href="tab3.html">back</a></p>
+</body>
+</html>

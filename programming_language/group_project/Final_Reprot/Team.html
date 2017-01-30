@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<meta name="robots" content="noindex">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Team-Page</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="jQuery/jquery-1.7.2.js"></script>
+    <script src="jQuery/jquery-2.2.3.js"></script>
+    <script src="scripts/tt.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        var rule1 = /^.{2,5}$/;
+        var count = 0;
+        $(document).ready(function () {
+            $('.error1').prev().focus(function () {
+                $(this).css("border-color", "#006cff")
+            })
+            $(".error1").prev().blur(function () {
+                if (rule1.test($(this).val())) {
+                    $(this).next().text('')
+                    $(this).css("border-color", "green")
+                    count += 1;
+                    if (count > 5) $("#Finish").show();
+                } else {
+                    $(this).next().text('請輸入2~6個字')
+                    $(this).css("border-color", "red")
+                    count -= 1;
+                    if(count < 6) $("#Finish").hide();
+                }
+            })
+            $(".error1").css("font-weight", "700");
+            $("input").not($(":button")).keypress(function (evt) {
+                if (evt.keyCode == 13) {
+                    if ($(this).attr("type") !== 'submit') {
+                        var fields = $(this).parents('form:eq(0),body').find('button, input, textarea, select');
+                        var index = fields.index(this);
+                        if (index > -1 && (index + 1) < fields.length) {
+                            fields.eq(index + 1).focus();
+                        }
+                        $(this).blur();
+                        return false;
+                    }
+                }
+            });
+            jQuery.fn.center_title = function () {
+                this.css("position", "absolute");
+                this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + "px");
+                return this;
+            }
+            jQuery.fn.center_inp = function () {
+                this.css("position", "absolute");
+                this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() - 120 + "px");
+                return this;
+            }
+            jQuery.fn.center_lab = function () {
+                this.css("position", "absolute");
+                this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() - 300 + "px");
+                return this;
+            }
+            jQuery.fn.center_spa = function () {
+                this.css("position", "absolute");
+                this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + 30 + "px");
+                return this;
+            }
+            $("#Title").center_title();
+            $("input").center_inp();
+            $("label").center_lab();
+            $(".error1").center_spa();
+            $("#teamname").css("top", "120px"); $("#mem0").css("top", "130px").css("color", "#2163ff"); $("#error2").css("top", "135px").css("color","red");
+            $("#member1").css("top", "200px"); $("#mem1").css("top", "200px").css("color", "#d400a2"); $("#error3").css("top", "205px").css("color", "red");
+            $("#member2").css("top", "250px"); $("#mem2").css("top", "250px").css("color", "#1eff15"); $("#error4").css("top", "255px").css("color", "red");
+            $("#member3").css("top", "300px"); $("#mem3").css("top", "300px").css("color", "#1eff15"); $("#error5").css("top", "305px").css("color", "red");
+            $("#member4").css("top", "350px"); $("#mem4").css("top", "350px").css("color", "#1eff15"); $("#error6").css("top", "355px").css("color", "red");
+            $("#member5").css("top", "400px"); $("#mem5").css("top", "400px").css("color", "#1eff15"); $("#error7").css("top", "405px").css("color", "red");
+            $("#member6").css("top", "450px"); $("#mem6").css("top", "450px").css("color", "#1eff15"); $("#error8").css("top", "455px").css("color", "red");
+            $("#Finish").css("top", "510px").css("left", "300px").hide();
+            $("#Title").css("color", "white").css("font-weight", "bold").css("font-family", "標楷體");
+        });
+    </script>
+    <noscript>
+        hahahahahahahahhahahahahhahahahahhahhaha!!!!!!!!!!!!!
+    </noscript>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000 url(http://elearning.slps.ntpc.edu.tw/4/98A/%E7%AF%84%E4%BE%8B/%E5%9C%96%E7%89%87/%E8%83%8C%E6%99%AF%E5%9C%96.jpg) center center fixed no-repeat;
+            -moz-background-size: cover;
+            background-size: cover;
+        }
+
+        label {
+            font-family: cursive;
+            font-weight: 900;
+            font-size: 24px;
+        }
+
+        .inputform1 {
+            border-radius: 50px;
+            border: 1px solid darkgray;
+            height: 40px;
+            width: 250px;
+            padding-left: 10px;
+            font-family: 微軟正黑體;
+            font-size: 16px;
+            outline: none;
+            margin: 5px 0;
+        }
+
+        .inputform {
+            border-radius: 50px;
+            border: 1px solid darkgray;
+            height: 25px;
+            padding-left: 10px;
+            font-family: 微軟正黑體;
+            font-size: 16px;
+            outline: none;
+            margin: 5px 0;
+        }
+
+        .btn {
+            background: #d6d6d6;
+            background-image: -webkit-linear-gradient(top, #d6d6d6, #858585);
+            background-image: -moz-linear-gradient(top, #d6d6d6, #858585);
+            background-image: -ms-linear-gradient(top, #d6d6d6, #858585);
+            background-image: -o-linear-gradient(top, #d6d6d6, #858585);
+            background-image: linear-gradient(to bottom, #d6d6d6, #858585);
+            -webkit-border-radius: 60;
+            -moz-border-radius: 60;
+            border-radius: 60px;
+            width: 230px;
+            text-shadow: 2px 2px 2px #1aebcf;
+            font-family: Georgia;
+            color: #cc00cc;
+            font-size: 46px;
+            padding: 10px 20px 10px 20px;
+            border: dotted #000000 20px;
+            text-decoration: none;
+            position: absolute;
+        }
+
+            .btn:hover {
+                background: #3cb0fd;
+                background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+                text-decoration: none;
+            }
+    </style>
+
+</head>
+<body>
+    <h1 id="Title" style="background-color:#2163ff;text-align:center;padding:10px;border-radius:30px;width:300px;">程式語言分組表</h1>
+    <form>
+        <label id="mem0" for='teamname'>Team ：</label><input type='text' id='teamname' class='inputform1' placeholder="輸入隊名"><span id="error2" class="error1" style="padding-left:10px"></span><br>
+        <label id="mem1" for='member1'>組長　：</label><input type='text' id='member1' class='inputform' placeholder="輸入姓名"><span id="error3" class="error1" style="padding-left:10px"></span><br>
+        <label id="mem2" for='member2'>組員　：</label><input type='text' id='member2' class='inputform' placeholder="輸入姓名"><span id="error4" class="error1" style="padding-left:10px"></span><br>
+        <label id="mem3" for='member3'>組員　：</label><input type='text' id='member3' class='inputform' placeholder="輸入姓名"><span id="error5" class="error1" style="padding-left:10px"></span><br>
+        <label id="mem4" for='member4'>組員　：</label><input type='text' id='member4' class='inputform' placeholder="輸入姓名"><span id="error6" class="error1" style="padding-left:10px"></span><br>
+        <label id="mem5" for='member5'>組員　：</label><input type='text' id='member5' class='inputform' placeholder="輸入姓名"><span id="error7" class="error1" style="padding-left:10px"></span><br>
+        <label id="mem6" for='member6'>組員　：</label><input type='text' id='member6' class='inputform' placeholder="輸入姓名"><span id="error8" class="error1" style="padding-left:10px"></span><br>
+        <input type="button" value="OK" id="Finish" class="btn" onclick="location.href = 'Final.html'"><br>
+    </form>
+</body>
+</html>

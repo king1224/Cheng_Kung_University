@@ -1,0 +1,399 @@
+﻿<!doctype html>
+<meta name="robots" content="noindex">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Start</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="jQuery/jquery-1.7.2.js"></script>
+    <script src="jQuery/jquery-2.2.3.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000 url(http://tch.zsps.tp.edu.tw/c7/3/%E7%99%BE%E5%AF%B6%E5%9C%96%E5%BA%AB/%E8%83%8C%E6%99%AF%E5%9C%96/04.jpg) center center fixed no-repeat;
+            -moz-background-size: cover;
+            background-size: cover;
+        }
+
+        #Title {
+            background-color: #0e8b00;
+            text-align: center;
+            padding: 10px;
+            width: 300px;
+        }
+
+        #level1 {
+            margin: 0;
+            padding: 0;
+            background: #3498db;
+            font-weight: bold;
+            font-size: 50px;
+            width: 300px;
+            height: 150px;
+            color: #fff;
+            text-align: center;
+            padding: 50px 50px 50px 50px;
+        }
+
+        .btn {
+            background: #718694;
+            background-image: -webkit-linear-gradient(top, #718694, #2980b9);
+            background-image: -moz-linear-gradient(top, #718694, #2980b9);
+            background-image: -ms-linear-gradient(top, #718694, #2980b9);
+            background-image: -o-linear-gradient(top, #718694, #2980b9);
+            background-image: linear-gradient(to bottom, #718694, #2980b9);
+            -webkit-border-radius: 60;
+            -moz-border-radius: 60;
+            height: 60px;
+            width: 200px;
+            border-radius: 100px;
+            font-family: Georgia;
+            color: #000000;
+            font-size: 24px;
+            padding: 5px 10px 5px 10px;
+            border: dotted #1e282e 5px;
+            text-decoration: none;
+        }
+
+            .btn:hover {
+                background: #e8ca09;
+                background-image: -webkit-linear-gradient(top, #e8ca09, #f7832a);
+                background-image: -moz-linear-gradient(top, #e8ca09, #f7832a);
+                background-image: -ms-linear-gradient(top, #e8ca09, #f7832a);
+                background-image: -o-linear-gradient(top, #e8ca09, #f7832a);
+                background-image: linear-gradient(to bottom, #e8ca09, #f7832a);
+                text-decoration: none;
+            }
+
+            #gallery { float: left; width: 65%; min-height: 12em; }
+            .gallery.custom-state-active { background: #eee; }
+            .gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+            .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+            .gallery li a { float: right; }
+            .gallery li a.ui-icon-zoomin { float: left; }
+            .gallery li img { width: 100%; cursor: move; }
+ 
+            #trash { float: right; width: 32%; min-height: 18em; padding: 1%; }
+            #trash h4 { line-height: 16px; margin: 0 0 0.4em; }
+            #trash h4 .ui-icon { float: left; }
+            #trash .gallery h5 { display: none; }
+  
+        #sortable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 60%;
+        }
+
+            #sortable li {
+                margin: 0 3px 3px 3px;
+                padding: 0.4em;
+                padding-left: 1.5em;
+                font-size: 1.4em;
+                height: 18px;
+            }
+
+                #sortable li span {
+                    position: absolute;
+                    margin-left: -1.3em;
+                }
+
+        #level4 {
+            height: 100px;
+            width: 100px;
+            background-color: #FF0000;
+            border-radius: 1000px;
+            padding: 50px;
+            font-size: 18pt;
+            color: yellow;
+        }
+
+        #level5 {
+            display: block;
+            width: 660px;
+            height: 240px;
+            margin: 0 10px 20px;
+            font-size: 100px;
+            letter-spacing: .15em;
+            color: #ebc000;
+            background: #fff;
+            border: 1px solid;
+            border-radius: 40px;
+        }
+    </style>
+    <script>
+        var rule1 = /^.{2,5}$/;
+        var l1 = 0;
+        $(document).ready(function () {
+            $('#nickname').focus(function () {
+                $(this).css("border-color", "#006cff");
+            });
+            $("#nickname").blur(function () {
+                if (rule1.test($(this).val())) {
+                    $('.error1').text('')
+                    $(this).css("border-color", "green");
+                } else {
+                    $('.error1').text('請輸入正確名稱');
+                    $(this).css("border-color", "red");
+                }
+            });
+            $('.inputform').focus(function () {
+                $(this).css("border-color", "#006cff");
+            });
+            $('.inputform').blur(function () {
+                $(this).css("border-color", "");
+            });
+            jQuery.fn.center = function () {
+                this.css("position", "absolute");
+                this.css("top", ($(window).height() - this.height()) / 2 + $(window).scrollTop() + "px");
+                this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + "px");
+                return this;
+            }
+            $("#Nextpage").center();
+
+            jQuery.fn.center_title = function () {
+                this.css("position", "absolute");
+                this.css("left", ($(window).width() - this.width()) / 2 + $(window).scrollLeft() + "px");
+                return this;
+            }
+            $("#Title").center_title();
+            $("#level1").center().disableSelection().css("marginLeft", '-=40px');
+            $("#level1").on('mouseover', function () {
+                $(this).stop(true).animate({ fontSize: '100px', width: '420px', marginLeft: '-=60px', height: '200' }, 500);
+                $("#Title").text("Click it!");
+            })
+	                .on('mouseout', function () {
+	                    $(this).animate({ fontSize: '50px', width: '300px', marginLeft: '+=60px', height: '150' }, 500);
+	                })
+                    .on('click', function () {
+                        $(this).stop(true).animate({ width: '+=130px'}, 500);
+                        $(this).animate({ width: '-=130px', marginLeft: '+=200px' }, 500);
+                        l1 += 1;
+                        if (l1 > 3) {
+                            $("#Title").text("Drop it!");
+                            $("#trash").fadeIn(1000);
+                            $("ul.gallery > li").fadeIn(1000);
+                        }
+                    });
+
+            var lev2 = 0;
+            $("#trash").center().disableSelection().draggable().hide().mouseover(function () {
+                $("#level1").fadeOut();
+                if (lev2 > 3) {
+                    $('#sortable').slideDown(1500);
+                    $("#Title").text("Sort it!");
+                    $(this).fadeOut(1000);
+                    $("ul.gallery > li").fadeOut(1000);
+                }
+            });
+            var $gallery = $("#gallery"),
+              $trash = $("#trash");
+
+            $("li", $gallery).draggable({
+                cancel: "a.ui-icon", 
+                revert: "invalid",
+                containment: "document",
+                helper: "clone",
+                cursor: "move"
+            });
+
+            $trash.droppable({
+                accept: "#gallery > li",
+                activeClass: "ui-state-highlight",
+                drop: function (event, ui) {
+                    deleteImage(ui.draggable);
+                }
+            });
+
+            $gallery.droppable({
+                accept: "#trash li",
+                activeClass: "custom-state-active",
+                drop: function (event, ui) {
+                    recycleImage(ui.draggable);
+                }
+            });
+
+            var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
+            function deleteImage($item) {
+                lev2 += 1;
+                $item.fadeOut(function () {
+                    var $list = $("ul", $trash).length ?
+                      $("ul", $trash) :
+                      $("<ul class='gallery ui-helper-reset'/>").appendTo($trash);
+
+                    $item.find("a.ui-icon-trash").remove();
+                    $item.append(recycle_icon).appendTo($list).fadeIn(function () {
+                        $item
+                          .animate({ width: "48px" })
+                          .find("img")
+                            .animate({ height: "36px" });
+                    });
+                });
+            }
+
+            var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Delete this image' class='ui-icon ui-icon-trash'>Delete image</a>";
+            function recycleImage($item) {
+                lev2 -= 1;
+                $item.fadeOut(function () {
+                    $item
+                      .find("a.ui-icon-refresh")
+                        .remove()
+                      .end()
+                      .css("width", "96px")
+                      .append(trash_icon)
+                      .find("img")
+                        .css("height", "72px")
+                      .end()
+                      .appendTo($gallery)
+                      .fadeIn();
+                });
+            }
+
+            function viewLargerImage($link) {
+                var src = $link.attr("href"),
+                  title = $link.siblings("img").attr("alt"),
+                  $modal = $("img[src$='" + src + "']");
+
+                if ($modal.length) {
+                    $modal.dialog("open");
+                } else {
+                    var img = $("<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />")
+                      .attr("src", src).appendTo("body");
+                    setTimeout(function () {
+                        img.dialog({
+                            title: title,
+                            width: 400,
+                            modal: true
+                        });
+                    }, 1);
+                }
+            }
+
+            $("ul.gallery > li").hide().disableSelection().click(function (event) {
+                var $item = $(this),
+                  $target = $(event.target);
+
+                if ($target.is("a.ui-icon-trash")) {
+                    deleteImage($item);
+                } else if ($target.is("a.ui-icon-zoomin")) {
+                    viewLargerImage($target);
+                } else if ($target.is("a.ui-icon-refresh")) {
+                    recycleImage($item);
+                }
+                if (lev2 > 3) {
+                    $('#sortable').slideDown(1500);
+                    $("#Title").text("Sort it!");
+                    $(this).fadeOut(1000);
+                    $("#trash").fadeOut(1000);
+                }
+                return false;
+            });
+
+            $("#Nextpage").hide();
+            $("#sortable").sortable().disableSelection().css("marginLeft", '+=500px').css("width","300px").hide().css("marginTop", '+=120px')
+                .mouseup(function () {
+                var y1 = $('#level3').offset().top;
+                var y2 = $('#kk2').offset().top;
+                var y3 = $('#kk3').offset().top;
+                var y4 = $('#kk4').offset().top;
+                var y5 = $('#kk5').offset().top;
+                var y6 = $('#kk6').offset().top;
+                var y7 = $('#kk7').offset().top;
+                if (y1 < y2 && y2 < y3 && y3 < y4 && y4 < y5 && y5 < y6 && y6 < y7) {
+                    $(this).slideUp(1000);
+                    $("#level4").slideDown(1500);
+                    $("#Title").text("Kill it!");
+                }
+                });
+            var lev4 = 0;
+            $("#level4").css("position", "absolute").css("top", "250px").css("right", "400px").hide().disableSelection().click(function () {
+                $(this).css("width", "+=20px").css("height", "+=20px").css("marginLeft", "-=10px").css("marginTop", "-=10px").css("font-size", "+=9pt")
+                .fadeTo('fast', 1 - lev4);
+                if (lev4 > 0.99) {
+                    $(this).hide();
+                    $("#level5").show();
+                    $("#Title").text("Watch it!");
+                }
+                lev4 += 0.04;
+            });
+            var lev5 = 0;
+            $("#level5").center().hide().on('mouseover', function () {
+                lev5 += 1;
+                $(this).css('border-color', '#ae5e9b').stop(true).animate({ borderWidth: lev5*10, color: "#ae5e9b" });
+            })
+            .on('mouseout', function () {
+                $(this).stop(true).animate({ borderWidth: 0, color: "#ebc000" });
+                if (lev5 > 6) {
+                    alert("Congratulation! You win the all games!");
+                    $(this).hide();
+                    $("#Nextpage").show();
+                    $("#Title").text("Winner's door!");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1 id="Title">Let's play a game</h1>
+
+    <input type="button" value="Team Page" id="Nextpage" class="btn" onclick="location.href = 'Team.html'"><br>
+
+    <div id="level1">
+        <div class="inner">Hello Player!</div>
+    </div>
+
+    <div class="ui-widget ui-helper-clearfix">
+
+        <div id="trash" class="ui-widget-content ui-state-default">
+            <h4 class="ui-widget-header"><span class="ui-icon ui-icon-trash">Trash</span> Trash</h4>
+        </div>
+
+        <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">Image1</h5>
+                <img src="http://hk.best-wallpaper.net/wallpaper/1920x1080/1310/Taiwan-landscape-mountain-top-wood-stairs-sun_1920x1080.jpg" alt="The peaks of High Tatras" width="96" height="72">
+                <a href="http://hk.best-wallpaper.net/wallpaper/1920x1080/1310/Taiwan-landscape-mountain-top-wood-stairs-sun_1920x1080.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">Image2</h5>
+                <img src="http://farm4.staticflickr.com/3795/9269794168_3ac58fc15c_b.jpg" alt="The chalet at the Green mountain lake" width="96" height="72">
+                <a href="http://farm4.staticflickr.com/3795/9269794168_3ac58fc15c_b.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">Image3</h5>
+                <img src="http://6.blog.xuite.net/6/8/1/6/15336743/blog_1163313/txt/246230280/5.jpg" alt="Planning the ascent" width="96" height="72">
+                <a href="http://6.blog.xuite.net/6/8/1/6/15336743/blog_1163313/txt/246230280/5.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+            </li>
+            <li class="ui-widget-content ui-corner-tr">
+                <h5 class="ui-widget-header">Image4</h5>
+                <img src="http://c.share.photo.xuite.net/taiwangrow/1c0e20e/13428151/692549975_m.jpg" alt="On top of Kozi kopka" width="96" height="72">
+                <a href="http://c.share.photo.xuite.net/taiwangrow/1c0e20e/13428151/692549975_m.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <ul id="sortable">
+        <li id="level3" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Don't touch me!</li>
+        <li id="kk6" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>The last follow me.</li>
+        <li id="kk5" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>I'm in the middle two.</li>
+        <li id="kk3" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>I follow the first.</li>
+        <li id="kk2" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>I'm the first.</li>
+        <li id="kk7" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>I'm the last.</li>
+        <li id="kk4" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>I'm in the middle one.</li>
+    </ul>
+
+    <div id="level4">I'm angry!</div>
+
+    <button id="level5">Touch me!</button>
+
+</body>
+</html>
