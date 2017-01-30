@@ -1,0 +1,175 @@
+module cc(clock,Clear,Up_Down,S);
+input clock,Clear;
+input Up_Down;
+output [7:0]S;
+wire [7:0]S;
+reg [3:0]tmp;
+
+
+
+always@(posedge clock or posedge Clear)
+begin
+
+if(Clear)
+	tmp=4'b0000;
+else
+begin
+if(Up_Down)
+	tmp=tmp+1;
+else
+	tmp=tmp-1;
+end
+end
+ss ss(.a(tmp), .r(S));
+
+
+endmodule
+
+
+module ss(a,r);
+input [3:0]a;
+output [7:0]r;
+reg [7:0]r;
+always@(a)
+begin
+case(a)
+4'b0000:r=8'b11111100;
+4'b0001:r=8'b01100000;
+4'b0010:r=8'b11011010;
+4'b0011:r=8'b11110010;
+4'b0100:r=8'b01100110;
+4'b0101:r=8'b10110110;
+4'b0110:r=8'b10111110;
+4'b0111:r=8'b11100000;
+4'b1000:r=8'b11111110;
+4'b1001:r=8'b11110110;
+4'b1010:r=8'b11101110;
+4'b1011:r=8'b00111110;
+4'b1100:r=8'b10011100;
+4'b1101:r=8'b01111010;
+4'b1110:r=8'b10011110;
+4'b1111:r=8'b10001110;
+endcase
+end
+
+endmodule
+
+
+
+
+
+
+
+
+
+
+
+
+
+module moore(clock,reset,in,out);
+
+input clock, reset, in;
+output out;
+reg [3:0] tmp;
+wire [7:0] out;
+reg [1:0] State, NextState;
+parameter S0=3'b000, S1=3'b001,S2=3'b010, S3=3'b011;S4=3'b100;S5=3'b101;
+
+
+always @(posedge clock or posedge reset)
+begin
+  if(reset)
+     State = S0;
+  else
+    State = NextState;
+end
+
+
+
+always @(in or State)
+begin
+  case(State)
+S0: begin
+            if(in == 1)
+	NextState = S1;
+            else
+	NextState = S0;
+          end
+S1: begin
+            if(in == 1)
+	NextState = S2;
+            else
+	NextState = S0;
+          end
+S2: begin
+            if(in == 1)
+	NextState = S4;
+            else
+	NextState = S3;
+          end
+S3: begin
+            if(in == 1)
+	NextState = S3;
+            else
+	NextState = S4;
+          end
+S4: begin
+            if(in == 1)
+	NextState = S5;
+            else
+	NextState = S1;
+          end
+S5: begin
+            if(in == 1)
+	NextState = S5;
+            else
+	NextState = S2;
+          end
+endcase
+end
+
+
+always @(State)
+begin
+  case(State)
+      S0:tmp =4'h 0;
+      S1:tmp =4'h 1;
+      S2:tmp =4'h 2;
+      S3:tmp =4'h 3;
+      S4:tmp =4'h 4;
+      S5:tmp =4'h 5;
+      endcase
+end
+
+ss ss(.a(tmp), .r(out));
+
+endmodule
+
+
+module ss(a,r);
+input [3:0]a;
+output [7:0]r;
+reg [7:0]r;
+always@(a)
+begin
+case(a)
+4'b0000:r=8'b11111100;
+4'b0001:r=8'b01100000;
+4'b0010:r=8'b11011010;
+4'b0011:r=8'b11110010;
+4'b0100:r=8'b01100110;
+4'b0101:r=8'b10110110;
+4'b0110:r=8'b10111110;
+4'b0111:r=8'b11100000;
+4'b1000:r=8'b11111110;
+4'b1001:r=8'b11110110;
+4'b1010:r=8'b11101110;
+4'b1011:r=8'b00111110;
+4'b1100:r=8'b10011100;
+4'b1101:r=8'b01111010;
+4'b1110:r=8'b10011110;
+4'b1111:r=8'b10001110;
+endcase
+end
+
+endmodule

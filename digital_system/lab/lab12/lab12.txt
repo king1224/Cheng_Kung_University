@@ -1,0 +1,85 @@
+module runhourse(clk,rst,switch,DOT_COL,DOT_ROW);
+input clk,rst,switch;
+output [23:0]DOT_ROW,DOT_COL;
+
+reg [23:0]DOT_ROW,DOT_COL;
+reg [25:0]count;
+reg [23:0]temp00;
+reg [23:0]temp01;
+reg [23:0]temp02;
+reg [23:0]temp03;
+reg [23:0]temp04;
+reg [23:0]temp05;
+reg [23:0]temp06;
+reg [23:0]temp07;
+
+//clock divide
+always@(posedge clk)
+begin
+	if(rst) count <= 26'd0;
+	else count <= (count == 26'd4800) ? 26'd0 : count + 26'd1;
+end
+
+//DOT
+always@(posedge clk)
+begin
+	if(rst) 
+	begin
+		temp00 <= 24'b00010000_00100000_00111100;
+		temp01 <= 24'b00010000_00100000_00000100;
+		temp02 <= 24'b00010000_00100000_00000100;
+		temp03 <= 24'b00010000_00100000_00111100;
+		temp04 <= 24'b00010000_00111100_00100000;
+		temp05 <= 24'b00010000_00100100_00100000;
+		temp06 <= 24'b00010000_00100100_00100000;
+		temp07 <= 24'b00010000_00111100_00111100;
+
+	end
+	else
+	begin
+		temp00 <= (count == 26'd4800) ? {temp00[22:0],temp00[23]} : temp00;
+		temp01 <= (count == 26'd4800) ? {temp01[22:0],temp01[23]} : temp01;
+		temp02 <= (count == 26'd4800) ? {temp02[22:0],temp02[23]} : temp02;
+		temp03 <= (count == 26'd4800) ? {temp03[22:0],temp03[23]} : temp03;
+		temp04 <= (count == 26'd4800) ? {temp04[22:0],temp04[23]} : temp04;
+		temp05 <= (count == 26'd4800) ? {temp05[22:0],temp05[23]} : temp05;
+		temp06 <= (count == 26'd4800) ? {temp06[22:0],temp06[23]} : temp06;
+		temp07 <= (count == 26'd4800) ? {temp07[22:0],temp07[23]} : temp07;
+	end
+end
+
+always@(posedge clk)
+begin
+	if(rst) DOT_ROW = {8'd1,8'd1,8'd1};
+	else
+	begin
+		case(DOT_ROW)
+			24'b00000001_00000001_00000001: DOT_ROW = 24'b00000010_00000010_00000010;
+			24'b00000010_00000010_00000010: DOT_ROW = 24'b00000100_00000100_00000100;
+			24'b00000100_00000100_00000100: DOT_ROW = 24'b00001000_00001000_00001000;
+			24'b00001000_00001000_00001000: DOT_ROW = 24'b00010000_00010000_00010000;
+			24'b00010000_00010000_00010000: DOT_ROW = 24'b00100000_00100000_00100000;
+			24'b00100000_00100000_00100000: DOT_ROW = 24'b01000000_01000000_01000000;
+			24'b01000000_01000000_01000000: DOT_ROW = 24'b10000000_10000000_10000000;
+			24'b10000000_10000000_10000000: DOT_ROW = 24'b00000001_00000001_00000001;
+			
+			default: DOT_ROW = 24'b00000001_00000001_00000001;
+		endcase
+	end
+end
+
+always@(DOT_ROW)
+begin
+	case(DOT_ROW)
+		24'b00000001_00000001_00000001: DOT_COL = temp0;
+		24'b00000010_00000010_00000010: DOT_COL = temp1;
+		24'b00000100_00000100_00000100: DOT_COL = temp2;
+		24'b00001000_00001000_00001000: DOT_COL = temp3;
+		24'b00010000_00010000_00010000: DOT_COL = temp4;
+		24'b00100000_00100000_00100000: DOT_COL = temp5;
+		24'b01000000_01000000_01000000: DOT_COL = temp6;
+		24'b10000000_10000000_10000000: DOT_COL = temp7;
+		default: DOT_COL = 24'd0;
+	endcase
+end
+endmodule

@@ -1,0 +1,47 @@
+module four(x,y,sel,out)
+
+input [3:0] x,y;
+input sel;
+output [4:0]out,over;
+
+(reg [4:0]out,over;)
+
+always@(x,y)
+begin
+if(sel==1)
+out=x+y;
+else
+out=x-y;
+end
+assign over=out[4];
+endmodule
+
+
+
+
+
+
+
+module E_T(in,clk,out);
+input [7:0]in;
+input clk; 	
+output [3:0]out;
+
+reg [3:0]out;
+
+always @(in)
+begin
+    case(in)
+	8'h01: out = 4'b1000;
+	8'h02: out = 4'b1001;
+	8'h04: out = 4'b1010;
+    8'h08: out = 4'b1011;
+	8'h10: out = 4'b1100;
+	8'h20: out = 4'b1101;
+	8'h40: out = 4'b1110;
+	8'h80: out = 4'b1111;
+	default:
+          out = 4'b0000;
+    endcase
+end
+endmodule

@@ -1,0 +1,43 @@
+module dd(A, Out);
+input [3:0]A;
+output [7:0]Out;
+reg Out;
+always @(A)
+begin
+   case(A)
+    4'b0000:	Out=8'b1111110;
+    4'b0001:	Out=8'b0110000;
+    4'b0010:	Out=8'b1101101;
+    4'b0011:	Out=8'b1011011;
+    4'b0100:	Out=8'b1110010;
+    4'b0101:	Out=8'b1111011;
+    4'b0110:	Out=8'b1111110;
+    4'b0111:	Out=8'b1000111;
+    default:	Out=8'b1111110;
+
+endcase  
+end
+endmodule
+
+
+
+
+module cc(A, Out);
+input [1:0]A;
+output [23:0]Out;
+reg Out;
+always @(A)
+begin
+   case(A)
+    2'b00:	Out=24'b11111100 01100000 11011010;
+    2'b01:	Out=24'b01100000 00111110 11011010;
+    2'b10:	Out=24'b01100000 11111100 11111100;
+    2'b11:	Out=24'b10011110 11101110 11101110;
+
+endcase  
+end
+endmodule
+
+
+https://goo.gl/CA6ffq
+http://ppt.cc/CpJcm

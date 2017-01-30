@@ -1,0 +1,145 @@
+module cc(clock,reset,green,yellow,red,S1,S2,row,col);
+input clock,reset;
+output green,red,yellow;
+output [7:0]S1,S2,col,row;
+wire [7:0]S1,S2;
+reg green,red,yellow,rl,str;
+reg [3:0]tmp1,tmp2,tmp3;
+reg [7:0]row,col;
+
+reg [9:0] count_1; //做為波形模擬時，降低系統時脈大小
+
+always @ (posedge clock) begin //輸入系統時脈 clk = 1024Hz
+ count_1=count_1 + 1 ;
+end
+
+reg [1:0] count_2; //做為波形模擬時，降低系統時脈大小
+
+always@(posedge count_1[9]) begin //輸入系脈 clk = 1Hz
+ count_2=count_2 + 1 ;
+end
+
+
+
+always@(posedge count_1[9] or posedge reset)
+begin
+
+if(reset)
+begin
+	tmp1=4'b0001; tmp2=4'b0011; rl=1'b1;
+end
+else if(rl)
+begin
+	if(tmp1==4'b0001)
+	begin 
+		if(tmp2!=4'b0000) tmp2=tmp2-1; 
+		else begin tmp1=4'b0000; tmp2=4'b1001; end 
+	end
+	else
+	begin
+		if(tmp2!=4'b0000) tmp2=tmp2-1;
+		else begin tmp2=4'b0111; rl=1'b0; end 
+	end
+end
+else
+begin 
+	if(tmp2!=4'b0000) tmp2=tmp2-1;
+	else begin tmp1=4'b0001; tmp2=4'b0011; rl=1'b1; end 
+end
+end
+
+ss ss1(.a(tmp1), .r(S1));
+ss ss2(.a(tmp2), .r(S2));
+
+always@(rl,tmp2)
+begin
+case(rl)
+1'b0:begin red=1'b1; green=1'b0; yellow=1'b0; end
+1'b1:begin if(tmp1!=4'b0000||tmp2>4'b0011) begin green=1'b1; yellow=1'b0; red=1'b0; end else begin green=1'b0; red=1'b0; yellow=1'b1; end end
+endcase
+end
+
+always@(posedge clock)
+begin
+if(rl==1'b1&&!(tmp1==4'b0000&&tmp2<=4'b0011))
+begin
+case(tmp3)
+4'b0001:begin tmp3=4'b0010; col=8'b00011000; row=8'b10000000; end
+4'b0010:begin tmp3=4'b0011; col=8'b00100100; row=8'b01000000; end
+4'b0011:begin tmp3=4'b0100; col=8'b01000010; row=8'b00100000; end
+4'b0100:begin tmp3=4'b0101; col=8'b11000011; row=8'b00010000; end
+4'b0101:begin tmp3=4'b0110; col=8'b01000010; row=8'b00001000; end
+4'b0110:begin tmp3=4'b0111; col=8'b01000010; row=8'b00000100; end
+4'b0111:begin tmp3=4'b1000; col=8'b01000010; row=8'b00000010; end
+4'b1000:begin tmp3=4'b0001; col=8'b01000010; row=8'b00000001; end
+default:begin tmp3=4'b0001; end
+endcase
+end
+else if(rl==1'b1&&tmp1==4'b0000&&tmp2<=4'b0011&&str==1)
+begin
+case(tmp3)
+4'b0001:begin tmp3=4'b0010; col=8'b00011000; row=8'b10000000; end
+4'b0010:begin tmp3=4'b0011; col=8'b00100100; row=8'b01000000; end
+4'b0011:begin tmp3=4'b0100; col=8'b01000010; row=8'b00100000; end
+4'b0100:begin tmp3=4'b0101; col=8'b11000011; row=8'b00010000; end
+4'b0101:begin tmp3=4'b0110; col=8'b01000010; row=8'b00001000; end
+4'b0110:begin tmp3=4'b0111; col=8'b01000010; row=8'b00000100; end
+4'b0111:begin tmp3=4'b1000; col=8'b01000010; row=8'b00000010; end
+4'b1000:begin tmp3=4'b0001; col=8'b01000010; row=8'b00000001; end
+default:begin tmp3=4'b0001; end
+endcase
+end
+else if(rl==1'b1&&tmp1==4'b0000&&tmp2<=4'b0011&&str==0)
+begin
+tmp3=4'b0001; col=8'b00000000; row=8'b00000000;
+end
+else if(rl==1'b0)
+begin
+case(tmp3)
+4'b0001:begin tmp3=4'b0010; col=8'b00011000; row=8'b10000000; end
+4'b0010:begin tmp3=4'b0011; col=8'b00011000; row=8'b01000000; end
+4'b0011:begin tmp3=4'b0100; col=8'b00111100; row=8'b00100000; end
+4'b0100:begin tmp3=4'b0101; col=8'b01111110; row=8'b00010000; end
+4'b0101:begin tmp3=4'b0110; col=8'b01011010; row=8'b00001000; end
+4'b0110:begin tmp3=4'b0111; col=8'b00011000; row=8'b00000100; end
+4'b0111:begin tmp3=4'b1000; col=8'b00100100; row=8'b00000010; end
+4'b1000:begin tmp3=4'b0001; col=8'b00100100; row=8'b00000001; end
+default:begin tmp3=4'b0001; end
+endcase
+end
+end
+
+always@(posedge count_2[1])
+begin
+str=str+1;
+end
+endmodule
+
+
+module ss(a,r);
+input [3:0]a;
+output [7:0]r;
+reg [7:0]r;
+always@(a)
+begin
+case(a)
+4'b0000:r=8'b11111100;
+4'b0001:r=8'b01100000;
+4'b0010:r=8'b11011010;
+4'b0011:r=8'b11110010;
+4'b0100:r=8'b01100110;
+4'b0101:r=8'b10110110;
+4'b0110:r=8'b10111110;
+4'b0111:r=8'b11100000;
+4'b1000:r=8'b11111110;
+4'b1001:r=8'b11110110;
+4'b1010:r=8'b11101110;
+4'b1011:r=8'b00111110;
+4'b1100:r=8'b10011100;
+4'b1101:r=8'b01111010;
+4'b1110:r=8'b10011110;
+4'b1111:r=8'b10001110;
+endcase
+end
+
+endmodule
