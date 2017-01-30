@@ -1,0 +1,27 @@
+a.
+shared：a,n,temp
+private：i,j,count
+
+b.
+不會有dependences，如果對外層的scoping做平行化
+這個Count_sort就會被執行number_of_threads次
+對於每個threads來說，這個Count_sort裡面的東西都是local變數
+彼此不會互相影響。
+但原本應執行一次卻會執行多次。
+
+c.
+可以
+用for loop來一個一個搬運資料，memcpy改成
+for(i=0;i<n;++i) a[i]=temp[i];
+就能平行化了
+
+e.
+sort 50000 random numbers with Count_sort
+serial：19(s)
+parallelize：6(s)	(4 threads)
+
+sort 500000 random numbers
+parallelize Count_sort：447(s)
+qsort in library：0(s)
+
+此處的Count_sort為O(n^2)的演算法，即使平行化了之後速度還是很慢
